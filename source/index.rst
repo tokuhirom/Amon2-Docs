@@ -11,6 +11,12 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   intro.rst
+   install.rst
+   bbs_tutorial.rst
+
+And class reference is available on CPAN. See http://search.cpan.org/dist/Amon2 .
+
 Indices and tables
 ==================
 
