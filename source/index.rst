@@ -20,7 +20,5 @@ And class reference is available on CPAN. See http://search.cpan.org/dist/Amon2 
 Indices and tables
 ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
 
