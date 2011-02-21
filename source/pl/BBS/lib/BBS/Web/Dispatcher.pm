@@ -9,6 +9,7 @@ any '/' => sub {
 
     my @entries = @{$c->dbh->selectall_arrayref(
         q{SELECT * FROM entry ORDER BY entry_id DESC LIMIT 10},
+        {Slice => {}}
     )};
     return $c->render( "index.tt" => { entries => \@entries, } );
 };

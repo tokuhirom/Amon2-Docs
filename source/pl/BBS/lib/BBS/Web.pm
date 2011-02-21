@@ -50,7 +50,7 @@ __PACKAGE__->load_plugins(
         state => 'Cookie',
         store => HTTP::Session::Store::File->new(
             dir => File::Spec->tmpdir(),
-        ),
+        )
     },
 );
 
@@ -59,6 +59,14 @@ __PACKAGE__->add_trigger(
     AFTER_DISPATCH => sub {
         my ( $c, $res ) = @_;
         $res->header( 'X-Content-Type-Options' => 'nosniff' );
+    },
+);
+
+__PACKAGE__->add_trigger(
+    BEFORE_DISPATCH => sub {
+        my ( $c ) = @_;
+        # ...
+        return;
     },
 );
 
