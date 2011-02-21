@@ -47,3 +47,8 @@ Open and edit tmpl/index.tt like following:
 
 .. literalinclude:: pl/BBS/tmpl/index.tt
 
+That's all.
+-----------
+
+Yes, Amon2 is pretty easy!
+
