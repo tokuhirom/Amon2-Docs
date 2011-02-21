@@ -1,6 +1,6 @@
 +{
     'DBI' => [
-        'dbi:SQLite:memory:',
+        'dbi:SQLite:dbname=test.db',
         '',
         '',
         +{

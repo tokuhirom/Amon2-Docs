@@ -64,3 +64,6 @@ body {
     padding-top: 2px;
 }
 
+@media screen and (max-device-width: 480px) {
+}
+

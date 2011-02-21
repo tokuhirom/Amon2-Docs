@@ -5,3 +5,4 @@ MANIFEST
 *.old
 nytprof.out
 development.db
+est.db

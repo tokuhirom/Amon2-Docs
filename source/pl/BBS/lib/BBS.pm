@@ -19,6 +19,4 @@ sub dbh {
     return $self->{dbh};
 }
 
-
-
 1;
