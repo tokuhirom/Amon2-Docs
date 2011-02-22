@@ -36,7 +36,10 @@ help:
 clean:
 	-rm -rf $(BUILDDIR)/*
 
-html:
+source/pl/BBS/Makefile.PL: source/pl/bbs.pl
+	@perl source/pl/bbs.pl
+
+html: source/pl/BBS/Makefile.PL
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."

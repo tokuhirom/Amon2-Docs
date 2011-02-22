@@ -3,8 +3,11 @@ use strict;
 use warnings;
 use utf8;
 use 5.010000;
-use autodie;
+use Fatal;
 use File::Path qw/rmtree/;
+use FindBin;
+
+chdir $FindBin::Bin;
 
 rmtree 'BBS';
 
