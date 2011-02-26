@@ -20,14 +20,15 @@ Contents:
    template.rst
    configuration.rst
    database.rst
+   testing.rst
+   email.rst
 
    amon3.rst
 
 And class reference is available on CPAN. Please see http://search.cpan.org/dist/Amon2 .
 
 .. TODO: l10n
-   TODO: Testing
-   TODO: E-mail
+   TODO: mobile-jp tutorial
 
 Indices and tables
 ==================

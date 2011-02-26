@@ -46,28 +46,35 @@ This is equivalent to::
 Teng
 ----
 
-You can use `Teng <http://search.cpan.org/perldoc?Teng>`_ as a O/R Mapper.
+Amon2 does not support O/R Mapper especially.
+But you can integrate every O/R mappers very easy!
 
-You write ``lib/MyApp/DB.pm`` as following::
-
-    package MyApp::DB;
-    use parent qw/Teng/;
-    1;
+This article provides tutorial for using `Teng <http://search.cpan.org/perldoc?Teng>`_ with Amon2.
 
 And write constructor for context object::
 
     package MyApp;
     use parent qw/Amon2/;
-    use MyApp::DB;
+    use Teng::Schema::Loader;
+    use Teng;
 
     sub db {
         my $self = shift;
-        if ( !defined $self->{dbh} ) {
+        if ( !defined $self->{db} ) {
             my $conf = $self->config->{'DB'}
               or die "missing configuration for 'DB'";
-            $self->{dbh} = MyApp::DBI->connect($conf);
+            my $dbh = DBI->connect($conf);
+            my $schema = Teng::Schema::Loader->load(
+                namespace => 'MyApp::DB',
+                dbh       => $dbh,
+            );
+            $self->{db} = Teng->new(
+                dbh    => $dbh,
+                schema => $schema,
+            );
         }
-        return $self->{dbh};
+        return $self->{db};
     }
+
     1;
 
