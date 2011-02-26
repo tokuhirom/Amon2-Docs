@@ -1,8 +1,3 @@
-.. Amon2 documentation master file, created by
-   sphinx-quickstart on Sun Feb 20 23:30:34 2011.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Welcome to Amon2's documentation!
 =================================
 
