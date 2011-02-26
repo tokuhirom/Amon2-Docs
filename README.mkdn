@@ -1,1 +1,9 @@
 This is a source of http://amon.64p.org/
+
+How do I check spelling?
+------------------------
+
+Just type:
+
+    % make spellcheck
+
