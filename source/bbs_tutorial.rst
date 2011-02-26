@@ -1,10 +1,10 @@
 Create BBS site - tutorial
 ==========================
 
-Create skelton
+Create skeleton
 --------------
 
-Just type
+Just type::
 
     % amon2-setup.pl --dispatcher=Lite BBS
 
@@ -26,7 +26,7 @@ You can find the configuration about RDBMS is config/development.pl
 Run the web server
 ------------------
 
-You can run the testing web server with folowing command:
+You can run the testing web server with following command::
 
     % plackup BBS.psgi
     HTTP::Server::PSGI: Accepting connections at http://0:5000/

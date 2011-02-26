@@ -33,11 +33,17 @@ help:
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 
+spellcheck:
+	zsh -c 'for f in **/*.rst; do aspell --lang=en -c $$f ; done'
+
 clean:
 	-rm -rf $(BUILDDIR)/*
 
 source/pl/BBS/Makefile.PL: source/pl/bbs.pl
 	@perl source/pl/bbs.pl
+
+reload: html
+	 osascript -e 'tell application "Google Chrome" to reload active tab of window 1'
 
 html: source/pl/BBS/Makefile.PL
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html

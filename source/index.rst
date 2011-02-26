@@ -14,8 +14,9 @@ Contents:
    intro.rst
    install.rst
    bbs_tutorial.rst
+   components.rst
 
-And class reference is available on CPAN. See http://search.cpan.org/dist/Amon2 .
+And class reference is available on CPAN. Please see http://search.cpan.org/dist/Amon2 .
 
 Indices and tables
 ==================
