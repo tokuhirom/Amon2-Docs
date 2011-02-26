@@ -1,5 +1,5 @@
-Create BBS site - tutorial
-==========================
+Tutorial - Create BBS site
+===========================
 
 Create skeleton
 --------------

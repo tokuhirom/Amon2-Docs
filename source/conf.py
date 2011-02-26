@@ -42,7 +42,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Amon2'
-copyright = u'2011, Tokuhiro Matsuno'
+copyright = u'2011, tokuhirom'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -92,7 +92,8 @@ pygments_style = 'sphinx'
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'nature'
+html_theme = 'haiku'
+# html_theme = 'nature'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -180,7 +181,7 @@ htmlhelp_basename = 'Amon2doc'
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index', 'Amon2.tex', u'Amon2 Documentation',
-   u'Tokuhiro Matsuno', 'manual'),
+   u'tokuhirom', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
