@@ -1,4 +1,4 @@
-[% INCLUDE 'include/header.tt' %]
+[% WRAPPER 'include/layout.tt' %]
 
 <form method="post" action="[% uri_for('/post') %]">
     <input type="text" name="body" />
@@ -11,4 +11,4 @@
 [% END %]
 </ul>
 
-[% INCLUDE 'include/footer.tt' %]
+[% END %]

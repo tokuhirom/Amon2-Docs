@@ -4,20 +4,31 @@ Database Integration
 DBI
 ---
 
-amon2-setup.pl creates ``MyApp::DBI``.
+Amon2 provides ``Amon2::DBI`` with splitted package `Amon2-DBI <http://search.cpan.org/dist/Amon2-DBI/>`_.
 
-``MyApp::Web`` provides following features on DBI:
+``Amon2::Web`` provides following features on DBI:
 
     * Better error message
     * RAII style transaction management(DBIx::TransactionManager)
     * SQL construction helper(with SQL::Interp)
+
+You can install it by following one liner::
+
+    % curl -L http://cpanmin.us | perl - Amon2::DBI
+
+And it contains ``Amon2::Plugin::DBI``. You can use the plugin as::
+
+    package MyApp;
+    __PACKAGE__->load_plugin(qw/DBI/);
+
+Then you can access the instance of DBI, you can call ``$c->dbh``.
 
 Transaction management
 ~~~~~~~~~~~~~~~~~~~~~~
 
 You can use it as following::
 
-    my $dbh = MyApp::DBI->connect(...);
+    my $dbh = Amon2::DBI->connect(...);
     my $txn = $dbh->txn_scope();
     ...
     $txn->commit();
@@ -29,7 +40,7 @@ For more details please access `DBIx::TransactionManager <http://search.cpan.org
 SQL helper
 ~~~~~~~~~~
 
-For your convenience, ``MyApp::DBI`` provides following helper methods.
+For your convenience, ``Amon2::DBI`` provides following helper methods.
 
 $dbh->do_i(@args)
 ``````````````````

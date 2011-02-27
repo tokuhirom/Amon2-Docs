@@ -6,10 +6,10 @@ Install required libraries
 
 This tutorial requires some libraries. Please type following command in your terminal::
 
-    % curl -L http://cpanmin.us | perl - DBD::SQLite
+    % curl -L http://cpanmin.us | perl - Amon2::DBI DBD::SQLite
 
 Create skeleton
---------------
+---------------
 
 Just type::
 
@@ -39,6 +39,13 @@ You can run the testing web server with following command::
     HTTP::Server::PSGI: Accepting connections at http://0:5000/
 
 Then, you can access the http://0.5000/ for testing.
+
+Load plugins
+------------
+
+This application requires Amon2::Plugin::DBI. You would load it.
+
+.. literalinclude:: pl/BBS/lib/BBS.pm
 
 Implement controller
 --------------------

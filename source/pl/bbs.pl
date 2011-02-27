@@ -23,6 +23,22 @@ create table entry (
 
 system "sqlite3 development.db < sql/sqlite3.sql";
 
+do_write('lib/BBS.pm', <<'...');
+package BBS;
+use strict;
+use warnings;
+use parent qw/Amon2/;
+our $VERSION='0.01';
+use 5.008001;
+
+use Amon2::Config::Simple;
+sub load_config { Amon2::Config::Simple->load(shift) }
+
+__PACKAGE__->load_plugin(qw/DBI/);
+
+1;
+...
+
 do_write('lib/BBS/Web/Dispatcher.pm', <<'...');
 package BBS::Web::Dispatcher;
 use strict;
@@ -55,7 +71,7 @@ post '/post' => sub {
 ...
 
 do_write('tmpl/index.tt', <<'...');
-[% INCLUDE 'include/header.tt' %]
+[% WRAPPER 'include/layout.tt' %]
 
 <form method="post" action="[% uri_for('/post') %]">
     <input type="text" name="body" />
@@ -68,7 +84,7 @@ do_write('tmpl/index.tt', <<'...');
 [% END %]
 </ul>
 
-[% INCLUDE 'include/footer.tt' %]
+[% END %]
 ...
 
 system "perl Makefile.PL";

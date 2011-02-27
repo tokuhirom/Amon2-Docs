@@ -17,7 +17,7 @@ I want rename following modules::
     Amon2::Config::Simple => Amon3::ConfigLoader
 
 Change default configuration variable
-------------------------------------
+-------------------------------------
 
 Amon2 uses ``$ENV{PLACK_ENV}`` as default configuration name.
 
