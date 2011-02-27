@@ -1,6 +1,13 @@
 Tutorial - Create BBS site
 ===========================
 
+Install required libraries
+--------------------------
+
+This tutorial requires some libraries. Please type following command in your terminal::
+
+    % curl -L http://cpanmin.us | perl - DBD::SQLite
+
 Create skeleton
 --------------
 
