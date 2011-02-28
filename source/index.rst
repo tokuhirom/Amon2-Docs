@@ -23,6 +23,7 @@ Contents:
    testing.rst
    email.rst
    plugin.rst
+   logging.rst
 
    amon3.rst
 
