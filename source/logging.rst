@@ -15,7 +15,7 @@ And using it as::
     warnf("foo");  # warn level
     debugf("ddd"); # debugging level
 
-You can custommize output format with `$Log::Minimal::PRINT`. And you can select log level with `$Log::Minimal::LOG_LEVEL`.
+You can customize output format with `$Log::Minimal::PRINT`. And you can select log level with `$Log::Minimal::LOG_LEVEL`.
 
 For more details, please access to `Log::Minimal <http://search.cpan.org/perldoc?Log::Minimal>`_ pod.
 

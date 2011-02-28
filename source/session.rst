@@ -35,3 +35,30 @@ And you can access instance of HTTP::Session by calling ``$c->session``. Here is
 
 For more details, please look `HTTP::Session <http://search.cpan.org/dist/HTTP-Session/>`_ and `Amon2::Plugin::Web::HTTPSession <http://search.cpan.org/perldoc?Amon2::Plugin::Web::HTTPSession>`_.
 
+Plack::Session
+--------------
+
+You can use `Plack::Session <http://search.cpan.org/dist/Plack-Session>`_ too.
+
+You write a bootstrap code for Plack::Middleware::Session::
+
+    builder {
+        enable 'Session';
+
+        MyApp::Web->to_app();
+    };
+
+And enable Amon2::Plugin::Web::PlackSession::
+
+    package MyApp::Web;
+    __PACKAGE__->load_plugin(qw/Web::PlackSession/);
+
+And use it::
+
+    sub dispatch {
+        my $c = shift;
+        my $cnt = $c->session->get('cnt') || 0;
+        $c->session->set('cnt' => ++$cnt);
+        return $c->create_response(200, ['Content-Type' => 'text/plain'], [$cnt]);
+    }
+
