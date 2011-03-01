@@ -1,6 +1,9 @@
 Logging
 =======
 
+Log::Minimal
+------------
+
 I recommend `Log::Minimal <http://search.cpan.org/dist/Log-Minimal>`_ for logging with Amon2. It's very easy to use.
 
 You can install it with following one liner::
