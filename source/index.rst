@@ -24,6 +24,7 @@ Contents:
    email.rst
    plugin.rst
    logging.rst
+   profiling.rst
 
    amon3.rst
 

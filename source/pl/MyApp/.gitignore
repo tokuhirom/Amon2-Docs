@@ -1,0 +1,8 @@
+Makefile
+inc/
+MANIFEST
+*.bak
+*.old
+nytprof.out
+development.db
+est.db

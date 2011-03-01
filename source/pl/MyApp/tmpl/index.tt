@@ -1,0 +1,5 @@
+[% WRAPPER 'include/layout.tt' %]
+
+hello, Amon2 world!
+
+[% END %]
