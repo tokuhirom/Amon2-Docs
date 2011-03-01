@@ -25,6 +25,7 @@ Contents:
    plugin.rst
    logging.rst
    profiling.rst
+   xmlrpc.rst
 
    amon3.rst
 
