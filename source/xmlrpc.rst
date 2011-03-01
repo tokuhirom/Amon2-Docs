@@ -39,3 +39,5 @@ Amon2 does not support XMLRPC server. But you can implement it as PSGI applicati
         $app;
     };
 
+You can create the context object by ``MyApp->bootstrap()``, same as CLI.
+
