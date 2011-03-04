@@ -3,7 +3,7 @@ use warnings;
 use utf8;
 
 use MyApp::Web;
-use Devel::NYTprof;
+use Devel::NYTProf;
 use HTTP::Message::PSGI;
 use HTTP::Request;
 use HTTP::Response;
