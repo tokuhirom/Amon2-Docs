@@ -20,3 +20,17 @@ You can write basic test like following::
     my $mech = Test::WWW::Mechanize::PSGI->new(app => $app);
     $mech->get_ok('http://localhost/'); # testing top page is OK
 
+Checking broken links
+~~~~~~~~~~~~~~~~~~~~~
+
+You can check broken link with ``$mech->page_links_ok()``.
+
+How do I mocking time?
+----------------------
+
+You can use `Time::Mock <http://search.cpan.org/perldoc?Time::Mock>`_.
+
+This module replaces core functions of Perl5.
+
+For more details, please access to Test::Mock pod on CPAN.
+
