@@ -13,7 +13,7 @@ Create skeleton
 
 Just type::
 
-    % amon2-setup.pl --dispatcher=Lite BBS
+    % amon2-setup.pl BBS
 
 Setup database
 ---------------
