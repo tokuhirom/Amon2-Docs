@@ -4,5 +4,6 @@ MANIFEST
 *.bak
 *.old
 nytprof.out
+nytprof/
 development.db
-est.db
+test.db

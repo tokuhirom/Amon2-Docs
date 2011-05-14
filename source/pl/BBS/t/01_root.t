@@ -4,8 +4,16 @@ use t::Util;
 use Plack::Test;
 use Plack::Util;
 use Test::More;
+use lib 'lib';
+use BBS;
 
 my $app = Plack::Util::load_psgi 'BBS.psgi';
+
+no warnings 'redefine';
+my $dbh = Amon2::DBI->connect('dbi:SQLite:', '', '', {});
+$dbh->do(do { open my $fh, '<', 'sql/sqlite3.sql'; local $/; <$fh> });
+sub BBS::dbh { $dbh }
+
 test_psgi
     app => $app,
     client => sub {
