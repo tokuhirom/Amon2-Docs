@@ -1,2 +1,8 @@
-cpanm --notest --no-man-pages Amon2
+#!/bin/sh
+
+# install latest Amon2
+cpanm JSON
+cpanm --notest --no-man-pages `perl -E 'use JSON; say decode_json(qx{curl http://api.beta.metacpan.org/release/Amon2})->{download_url}'`
+
+# build html
 make html
