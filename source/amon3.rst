@@ -17,8 +17,3 @@ Amon2 uses ``$ENV{PLACK_ENV}`` as default configuration name.
 
 But it's bad idea. It makes hard to use. Amon2 should use ``$ENV{AMON2_ENV}`` or ``$ENV{"${PROJ}_ENV"}`` instead.
 
-Remove Amon2::Plugin::LogDispatch from core distribution
---------------------------------------------------------
-
-I've switched to Log::Minimal today :P
-
