@@ -1,1 +1,2 @@
+cpanm --notest --no-man-pages Amon2
 make html
