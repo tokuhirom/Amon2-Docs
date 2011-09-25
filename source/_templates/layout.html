@@ -1,0 +1,13 @@
+{% extends "!layout.html" %}
+
+{% block extrahead %}
+{{ super() }}
+<link href="_static/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="_static/google-code-prettify/prettify.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('pre').addClass('prettyprint');
+        prettyPrint();
+    });
+</script>
+{% endblock %}
