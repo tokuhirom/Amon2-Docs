@@ -7,7 +7,7 @@ use Test::More;
 use lib 'lib';
 use BBS;
 
-my $app = Plack::Util::load_psgi 'BBS.psgi';
+my $app = Plack::Util::load_psgi 'app.psgi';
 
 no warnings 'redefine';
 my $dbh = Amon2::DBI->connect('dbi:SQLite:', '', '', {});
