@@ -34,6 +34,8 @@ Documents:
 
    components.rst
    trigger.rst
+   cli.rst
+   configuration.rst
 
    extends.rst
 

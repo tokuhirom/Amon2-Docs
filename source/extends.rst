@@ -6,11 +6,11 @@ You can extends project using Amon2 by a lot of CPAN modules.
 .. toctree::
    :maxdepth: 3
 
-   session.rst
    cli.rst
+
+   session.rst
    output.rst
    template.rst
-   configuration.rst
    database.rst
    testing.rst
    email.rst
