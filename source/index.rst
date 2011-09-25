@@ -32,7 +32,7 @@ Documents:
    dotcloud.rst
    bbs_tutorial.rst
 
-   archictecture.rst
+   architecture.rst
    extends.rst
 
    contribute.rst
