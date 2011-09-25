@@ -32,12 +32,7 @@ Documents:
    dotcloud.rst
    bbs_tutorial.rst
 
-   components.rst
-   trigger.rst
-   cli.rst
-   configuration.rst
-   plugin.rst
-
+   archictecture.rst
    extends.rst
 
    contribute.rst
