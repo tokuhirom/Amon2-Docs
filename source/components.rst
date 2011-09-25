@@ -20,7 +20,7 @@ The context object bootstrapping with following statement::
 
 You can get a context object by ``$Amon2::CONTEXT`` from everywhere.
 
-Generic context object MUST implement following abstract methods::
+Generic context object MUST implement following abstract methods.
 
 MyApp->load_config()
 ~~~~~~~~~~~~~~~~~~~~
