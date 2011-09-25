@@ -7,7 +7,6 @@ You can extends project using Amon2 by a lot of CPAN modules.
    :maxdepth: 3
 
    session.rst
-   trigger.rst
    cli.rst
    output.rst
    template.rst

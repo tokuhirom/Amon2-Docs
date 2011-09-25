@@ -33,6 +33,8 @@ Documents:
    bbs_tutorial.rst
 
    components.rst
+   trigger.rst
+
    extends.rst
 
    contribute.rst
