@@ -36,6 +36,7 @@ Documents:
    trigger.rst
    cli.rst
    configuration.rst
+   plugin.rst
 
    extends.rst
 
