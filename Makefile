@@ -38,7 +38,7 @@ spellcheck:
 
 clean:
 	-rm -rf $(BUILDDIR)/*
-	@rm -rf src/pl/BBS/
+	rm -rf src/pl/BBS/
 
 source/pl/BBS/Makefile.PL: source/pl/bbs.pl
 	@perl source/pl/bbs.pl
