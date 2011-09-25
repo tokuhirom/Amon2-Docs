@@ -26,29 +26,14 @@ Amon2 have following features:
 Documents:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    install.rst
    dotcloud.rst
    bbs_tutorial.rst
 
    components.rst
-   session.rst
-   trigger.rst
-   cli.rst
-   output.rst
-   template.rst
-   configuration.rst
-   database.rst
-   testing.rst
-   email.rst
-   plugin.rst
-   logging.rst
-   profiling.rst
-   xmlrpc.rst
-   request_response.rst
-
-   mobilejp.rst
+   extends.rst
 
    contribute.rst
 
