@@ -48,6 +48,8 @@ Documents:
    xmlrpc.rst
    request_response.rst
 
+   mobilejp.rst
+
    contribute.rst
 
    amon3.rst
