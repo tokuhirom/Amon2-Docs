@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use utf8;
 use 5.010000;
-use Fatal;
+use autodie ":all";
 use File::Path qw/rmtree/;
 use FindBin;
 
@@ -13,7 +13,7 @@ rmtree 'BBS';
 
 eval "use Amon2::Plugin::DBI;1;" or system "cpanm", "Amon2::Plugin::DBI";
 
-system "amon2-setup.pl BBS";
+system "amon2-setup.pl --plugin=DBI BBS";
 chdir 'BBS';
 
 do_write('sql/sqlite3.sql', <<'...');
@@ -24,22 +24,7 @@ create table entry (
 ...
 
 system "sqlite3 development.db < sql/sqlite3.sql";
-
-do_write('lib/BBS.pm', <<'...');
-package BBS;
-use strict;
-use warnings;
-use parent qw/Amon2/;
-our $VERSION='0.01';
-use 5.008001;
-
-use Amon2::Config::Simple;
-sub load_config { Amon2::Config::Simple->load(shift) }
-
-__PACKAGE__->load_plugin(qw/DBI/);
-
-1;
-...
+system "sqlite3 test.db < sql/sqlite3.sql";
 
 do_write('lib/BBS/Web/Dispatcher.pm', <<'...');
 package BBS::Web::Dispatcher;

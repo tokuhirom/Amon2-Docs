@@ -13,7 +13,7 @@ Create skeleton
 
 Just type::
 
-    % amon2-setup.pl BBS
+    % amon2-setup.pl --plugin=DBI BBS
 
 Setup database
 ---------------
@@ -22,7 +22,7 @@ Put sql/sqlite3.sql.
 
 .. literalinclude:: pl/BBS/sql/sqlite3.sql
 
-and type
+and type::
 
     % sqlite3 development.db <  sql/sqlite3.sql
 
@@ -35,17 +35,10 @@ Run the web server
 
 You can run the testing web server with following command::
 
-    % plackup BBS.psgi
+    % plackup app.psgi
     HTTP::Server::PSGI: Accepting connections at http://0:5000/
 
 Then, you can access the http://0.5000/ for testing.
-
-Load plugins
-------------
-
-This application requires Amon2::Plugin::DBI. You would load it.
-
-.. literalinclude:: pl/BBS/lib/BBS.pm
 
 Implement controller
 --------------------

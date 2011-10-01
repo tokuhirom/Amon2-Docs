@@ -12,3 +12,4 @@ my $mech = Test::WWW::Mechanize::PSGI->new(app => $app);
 $mech->get_ok('/');
 
 done_testing;
+

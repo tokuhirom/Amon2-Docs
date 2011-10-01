@@ -1,10 +1,10 @@
 +{
     'DBI' => [
-        'dbi:SQLite:dbname=deployment.db',
+        "dbi:SQLite:dbname=@{[ BBS->base_dir ]}/deployment.db",
         '',
         '',
-        +{
-            sqlite_unicode => 1,
-        }
+        +{ sqlite_unicode => 1 },
     ],
+
 };
+
