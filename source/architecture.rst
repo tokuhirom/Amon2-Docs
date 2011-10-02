@@ -10,4 +10,5 @@ This is a architecture specification of Amon2.
    trigger.rst
    cli.rst
    configuration.rst
+   flavor.rst
    plugin.rst
