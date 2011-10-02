@@ -32,7 +32,7 @@ Documents:
    dotcloud.rst
    bbs_tutorial.rst
 
-   archictecture.rst
+   architecture.rst
    extends.rst
 
    contribute.rst
@@ -42,7 +42,6 @@ Documents:
 And class reference is available on CPAN. Please see http://search.cpan.org/dist/Amon2 .
 
 .. TODO: l10n
-   TODO: mobile-jp tutorial
 
 Indices and tables
 ==================
