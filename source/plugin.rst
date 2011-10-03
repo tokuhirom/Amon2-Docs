@@ -37,23 +37,24 @@ Just add a "@@" lines based on __DATA__ section::
 Hook points
 ~~~~~~~~~~~
 
-prereq_pm
-^^^^^^^^^
+Makefile.PL
+^^^^^^^^^^^
 
 add a prerequired modules for Makefile.PL.
 
-context
-^^^^^^^
+app.psgi
+^^^^^^^^
+
+app.psgi
+
+<<CONTEXT_PATH>>
+^^^^^^^^^^^^^^^^^
 
 Add a snippet for lib/MyApp.pm.
 
-web_context
-^^^^^^^^^^^
+<<WEB_CONTEXT_PATH>>
+^^^^^^^^^^^^^^^^^^^^^
 
 Add a snippet for lib/MyApp/Web.pm.
 
-middleware
-^^^^^^^^^^
-
-Add a Plack middlewares code for app.psgi.
 

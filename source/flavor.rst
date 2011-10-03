@@ -57,6 +57,43 @@ You can load a plugins by flavor::
     package My::Flavor1;
     sub plugins { qw(Web::JSON) }
 
+context_path
+~~~~~~~~~~~~~
+
+This property indicates a path of context class. It is normally lib/<<PATH>>.pm.
+
+web_context_path
+~~~~~~~~~~~~~~~~
+
+This property indicates a path of web context class. It is normally lib/<<PATH>>/Web.pm.
+
+Path rewriting
+--------------
+
+Amon2::Setup rewrite a template path for normalization.
+
+<<PATH>>
+~~~~~~~~
+
+<<PATH>> rewrite as a directory path from module name. e.g. "My/App"::
+
+    lib/<<PATH>>.pm → lib/My/App.pm
+    lib/<<PATH>>/Web.pm → lib/My/App/Web.pm
+
+<<WEB_CONTEXT_PATH>>
+~~~~~~~~~~~~~~~~~~~~
+
+This path indicates a path for web context object. e.g.:
+
+    <<WEB_CONTEXT_PATH>> → lib/<<PATH>>/Web.pm
+
+<<CONTEXT_PATH>>
+~~~~~~~~~~~~~~~~
+
+This path indicates a path for context object. e.g.:
+
+    <<CONTEXT_PATH>> → lib/<<PATH>>.pm
+
 Templates
 ---------
 
