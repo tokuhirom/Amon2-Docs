@@ -3,9 +3,11 @@ System requierments
 
  * Perl 5.8.1+
  * Operating Systems
+
    * Linux 2.6+
    * OSX 10.6+
    * And other UNIX like operating systems
+
  * Memory: 256MB+
  * Disks: 1GB+
 
