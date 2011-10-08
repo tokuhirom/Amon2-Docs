@@ -6,7 +6,7 @@ DBI
 
 Amon2 provides ``Amon2::DBI`` with splitted package `Amon2-DBI <http://search.cpan.org/dist/Amon2-DBI/>`_.
 
-``Amon2::Web`` provides following features on DBI:
+``Amon2::DBI`` provides following features on DBI:
 
     * Better error message
     * RAII style transaction management(DBIx::TransactionManager)
