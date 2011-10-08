@@ -29,6 +29,7 @@ Documents:
    :maxdepth: 3
 
    install.rst
+   requirements.rst
    dotcloud.rst
    bbs_tutorial.rst
 
