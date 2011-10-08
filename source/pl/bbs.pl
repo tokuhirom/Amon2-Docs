@@ -16,30 +16,14 @@ eval "use Amon2::Plugin::DBI;1;" or system "cpanm", "Amon2::Plugin::DBI";
 system "amon2-setup.pl BBS";
 chdir 'BBS';
 
-do_write('sql/sqlite3.sql', <<'...');
-create table entry (
+do_write('sql/sqlite.sql', slurp('sql/sqlite.sql') . "\n" . <<'...');
+CREATE TABLE IF NOT EXISTS entry (
     entry_id INTEGER NOT NULL PRIMARY KEY,
     body varchar(255) not null
 );
 ...
 
-system "sqlite3 development.db < sql/sqlite3.sql";
-
-do_write('lib/BBS.pm', <<'...');
-package BBS;
-use strict;
-use warnings;
-use parent qw/Amon2/;
-our $VERSION='0.01';
-use 5.008001;
-
-use Amon2::Config::Simple;
-sub load_config { Amon2::Config::Simple->load(shift) }
-
-__PACKAGE__->load_plugin(qw/DBI/);
-
-1;
-...
+system "sqlite3 development.db < sql/sqlite.sql";
 
 do_write('lib/BBS/Web/Dispatcher.pm', <<'...');
 package BBS::Web::Dispatcher;
@@ -101,11 +85,6 @@ use BBS;
 
 my $app = Plack::Util::load_psgi 'app.psgi';
 
-no warnings 'redefine';
-my $dbh = Amon2::DBI->connect('dbi:SQLite:', '', '', {});
-$dbh->do(do { open my $fh, '<', 'sql/sqlite3.sql'; local $/; <$fh> });
-sub BBS::dbh { $dbh }
-
 test_psgi
     app => $app,
     client => sub {
@@ -119,11 +98,20 @@ test_psgi
 done_testing;
 ...
 
+unlink 't/02_mech.t';
+
 system "perl Makefile.PL";
 system "make test";
 
 # ------------------------------------------------------------------------- 
 # DSL
+
+sub slurp {
+    my $fname = shift;
+    open my $fh, '<:utf8', $fname or die "$fname: $!";
+    local $/;
+    <$fh>;
+}
 
 sub do_write {
     my ($fname, $src) = @_;

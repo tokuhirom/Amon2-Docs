@@ -9,11 +9,6 @@ use BBS;
 
 my $app = Plack::Util::load_psgi 'app.psgi';
 
-no warnings 'redefine';
-my $dbh = Amon2::DBI->connect('dbi:SQLite:', '', '', {});
-$dbh->do(do { open my $fh, '<', 'sql/sqlite3.sql'; local $/; <$fh> });
-sub BBS::dbh { $dbh }
-
 test_psgi
     app => $app,
     client => sub {

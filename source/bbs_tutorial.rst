@@ -1,30 +1,21 @@
 Tutorial - Create BBS site
 ===========================
 
-Install required libraries
---------------------------
-
-This tutorial requires some libraries. Please type following command in your terminal::
-
-    % curl -L http://cpanmin.us | perl - Amon2::DBI DBD::SQLite
-
 Create skeleton
 ---------------
 
 Just type::
 
     % amon2-setup.pl BBS
+    % cd BBS/
+    % curl -L http://cpanmin.us | perl - --installdeps .
 
 Setup database
 ---------------
 
-Put sql/sqlite3.sql.
+Put sql/sqlite.sql.
 
-.. literalinclude:: pl/BBS/sql/sqlite3.sql
-
-and type
-
-    % sqlite3 development.db <  sql/sqlite3.sql
+.. literalinclude:: pl/BBS/sql/sqlite.sql
 
 You can find the configuration about RDBMS is config/development.pl
 
