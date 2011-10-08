@@ -35,7 +35,7 @@ Usage of this module is very easy. Install it from CPAN.::
 And load a plugin.::
 
     package MyApp::Web;
-    use Amon2::Web -base;
+    use parent qw(Amon2::Web);
 
     __PACKAGE__->load_plugins(
         'Web::MobileAgent',
