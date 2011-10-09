@@ -10,7 +10,7 @@ You can use HTTP::MobileAgent module to get a informantions from HTTP headers.
 
 You would use Amon2::Plugin::Web::MobileAgent for this purpose. Install it from CPAN.::
 
-    cpanm Amon2::Plugin::Web::MobileAgent
+    % cpanm Amon2::Plugin::Web::MobileAgent
 
 You can load a module.::
 
@@ -30,7 +30,7 @@ I wrote a Amon2::Plugin::Web::MobileCharset.
 
 Usage of this module is very easy. Install it from CPAN.::
 
-    cpanm Amon2::Plugin::Web::MobileCharset
+    % cpanm Amon2::Plugin::Web::MobileCharset
 
 And load a plugin.::
 
@@ -49,7 +49,7 @@ How can I convert a Japanese Zenkaku-Katakana to Hankaku-Katakana?
 
 You can add a HTML filter. Install Lingua::JA::Regular::Unicode from CPAN.::
 
-    cpanm Lingua::JA::Regular::Unicode
+    % cpanm Lingua::JA::Regular::Unicode
 
 And you can add a katakana_z2h filter for HTML processing.::
 
@@ -61,4 +61,23 @@ And you can add a katakana_z2h filter for HTML processing.::
             return katakana_z2h($html);
         }
     );
+
+How can I use a StickyQuery session for DoCoMo Browser 1.0?
+-----------------------------------------------------------
+
+You can use HTTP::Session for this purpose::
+
+    package MyApp::Web;
+    use HTTP::Session::Store::Memcached;
+    __PACKAGE__->load_plugins(qw/Web::HTTPSession/ => {
+        state => 'URI',
+        store => sub {
+            my ($c) = @_;
+            HTTP::Session::Store::Memcached->new(
+                memd => $c->get('Cache::Memcached::Fast')
+            );
+        },
+    });
+
+But I don't recommend to use StickyQuery. It makes vulnerability.
 
