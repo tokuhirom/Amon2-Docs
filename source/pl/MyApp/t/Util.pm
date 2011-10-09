@@ -3,9 +3,18 @@ BEGIN {
     unless ($ENV{PLACK_ENV}) {
         $ENV{PLACK_ENV} = 'test';
     }
+	if ($ENV{PLACK_ENV} eq 'deployment') {
+		die "Do not run a test script on deployment environment";
+	}
 }
+use File::Spec;
+use File::Basename;
+use lib File::Spec->rel2abs(File::Spec->catdir(dirname(__FILE__), '..', 'extlib', 'lib', 'perl5'));
+use lib File::Spec->rel2abs(File::Spec->catdir(dirname(__FILE__), '..', 'lib'));
 use parent qw/Exporter/;
-use Test::More 0.96;
+use Test::More 0.98;
+
+our @EXPORT = qw(slurp);
 
 {
     # utf8 hack.
@@ -21,13 +30,20 @@ use Test::More 0.96;
     };
 }
 
-# setup database
+
+sub slurp {
+	my $fname = shift;
+	open my $fh, '<:encoding(UTF-8)', $fname or die "$fname: $!";
+	do { local $/; <$fh> };
+}
+
+# initialize database
 use MyApp;
-open my $fh, "<", "sql/sqlite3.sql" or die "Cannot open file: sql/sqlite3.sql";
-unlink 'test.db' if -f 'test.db';
-my $c = MyApp->new;
-for (grep /\S/, split /;/, do { local $/; <$fh> }) {
-    $c->dbh->do($_);
+{
+    unlink 'db/test.db' if -f 'db/test.db';
+
+    my $c = MyApp->new();
+    $c->setup_schema();
 }
 
 1;

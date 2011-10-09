@@ -3,9 +3,9 @@ use File::Basename qw(dirname);
 my $basedir = File::Spec->rel2abs(File::Spec->catdir(dirname(__FILE__), '..'));
 my $dbpath;
 if ( -d '/home/dotcloud/') {
-    $dbpath = "/home/dotcloud/test.db";
+    $dbpath = "/home/dotcloud/deployment.db";
 } else {
-    $dbpath = File::Spec->catfile($basedir, 'db', 'test.db');
+    $dbpath = File::Spec->catfile($basedir, 'db', 'deployment.db');
 }
 +{
     'DBI' => [
