@@ -26,7 +26,7 @@ Run the web server
 
 You can run the testing web server with following command::
 
-    % plackup BBS.psgi
+    % plackup app.psgi
     HTTP::Server::PSGI: Accepting connections at http://0:5000/
 
 Then, you can access the http://0.5000/ for testing.
