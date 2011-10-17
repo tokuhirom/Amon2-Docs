@@ -1,6 +1,7 @@
 package BBS::Web;
 use strict;
 use warnings;
+use utf8;
 use parent qw/BBS Amon2::Web/;
 use File::Spec;
 
@@ -55,6 +56,7 @@ __PACKAGE__->add_trigger(
     AFTER_DISPATCH => sub {
         my ( $c, $res ) = @_;
         $res->header( 'X-Content-Type-Options' => 'nosniff' );
+        $res->header( 'X-Frame-Options' => 'DENY' );
     },
 );
 
