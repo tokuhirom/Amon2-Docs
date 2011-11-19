@@ -8,7 +8,7 @@
         «&#160;&#160;<a href="{{ prev.link|e }}">{{ prev.title }}</a>
         &#160;&#160;::&#160;&#160;
         {%- endif %}
-        <a class="uplink" href="{{ pathto(master_doc) }}">{{ _('Contents') }}</a>
+        <a class="uplink" href="{{ pathto('docs') }}">{{ _('Contents') }}</a>
         {%- if next %}
         &#160;&#160;::&#160;&#160;
         <a href="{{ next.link|e }}">{{ next.title }}</a>&#160;&#160;»
@@ -99,7 +99,7 @@
 
         {%- if pagename == 'index' %}
             <header>
-                <h1 class="heading"><a href="{{ pathto('index') }}">
+                <h1 class="heading"><a href="{{ pathto('docs') }}">
                     <span class="logo">Amon2</span></a></h1>
                 <span class="subtitle">Web application framework for Rapid web development</span>
             </header>
@@ -141,7 +141,7 @@ get '/' =&gt; sub {<br />
             </section>
         {% else %}
             <header>
-                <h1 class="heading"><a href="{{ pathto('index') }}">
+                <h1 class="heading"><a href="{{ pathto('docs') }}">
                     <span class="shorttitle">{{ shorttitle|e }}</span></a></h1>
                 <h2 class="heading"><span class="subtitle">{{ title|striptags|e }}</span></h2>
             </header>
