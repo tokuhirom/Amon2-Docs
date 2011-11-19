@@ -22,7 +22,8 @@ header {
         font-size: 60%;
     }
 }
-pre.prettyprint {
+pre.prettyprint, body#index .code {
+    border-radius: 8px;
     padding: 8px;
     background-color: #F2F2F2;
     border: 1px solid darken(#F2F2F2, 10%);
@@ -31,6 +32,33 @@ pre.prettyprint {
 nav {
     text-align: right;
     background-color: #F2F2F2;
+}
+
+body#index {
+    header {
+        @import "http://fonts.googleapis.com/css?family=Nothing+You+Could+Do";
+        margin-top: 40px;
+        text-align: center;
+        .logo {
+            font-family: 'Nothing You Could Do', cursive;
+            font-size: 128px;
+        }
+        .subtitle {
+            font-family: 'Nothing You Could Do', cursive;
+            font-size: 24px;
+        }
+    }
+    .container {
+        width: 600px;
+    }
+    .row {
+        margin-top: 20px;
+        margin-left: 0px;
+        margin-right: 0px;
+        h2 {
+            font-family: 'Nothing You Could Do', cursive;
+        }
+    }
 }
 
 footer {
