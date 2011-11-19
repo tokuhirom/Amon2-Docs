@@ -17,4 +17,5 @@ You can extends project using Amon2 by a lot of CPAN modules.
    xmlrpc.rst
    request_response.rst
    mobilejp.rst
+   l10n.rst
 

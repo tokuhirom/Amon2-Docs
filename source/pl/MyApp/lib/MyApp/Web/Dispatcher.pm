@@ -1,10 +1,17 @@
 package MyApp::Web::Dispatcher;
 use strict;
 use warnings;
+use Amon2::Web::Dispatcher::Lite;
 
-use Amon2::Web::Dispatcher::RouterSimple;
+any '/' => sub {
+    my ($c) = @_;
+    $c->render('index.tt');
+};
 
-connect '/' => 'Root#index';
-
+get '/account/logout' => sub {
+    my ($c) = @_;
+    $c->session->expire();
+    $c->redirect('/');
+};
 
 1;

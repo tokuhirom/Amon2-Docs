@@ -1,12 +1,9 @@
 package BBS::Web;
 use strict;
 use warnings;
+use utf8;
 use parent qw/BBS Amon2::Web/;
 use File::Spec;
-
-# load all controller classes
-use Module::Find ();
-Module::Find::useall("BBS::Web::C");
 
 # dispatcher
 use BBS::Web::Dispatcher;
@@ -16,17 +13,16 @@ sub dispatch {
 
 # setup view class
 use Text::Xslate;
-use File::Spec;
 {
-    my $view_conf = __PACKAGE__->config->{'Text::Xslate'} || +{ };
+    my $view_conf = __PACKAGE__->config->{'Text::Xslate'} || +{};
     unless (exists $view_conf->{path}) {
         $view_conf->{path} = [ File::Spec->catdir(__PACKAGE__->base_dir(), 'tmpl') ];
     }
     my $view = Text::Xslate->new(+{
         'syntax'   => 'TTerse',
-        'module'   => [ 'Text::Xslate::Bridge::TT2Like' ],
+        'module'   => [ 'Text::Xslate::Bridge::Star' ],
         'function' => {
-            c        => sub { Amon2->context() },
+            c => sub { Amon2->context() },
             uri_with => sub { Amon2->context()->req->uri_with(@_) },
             uri_for  => sub { Amon2->context()->uri_for(@_) },
             static_file => do {
@@ -38,7 +34,7 @@ use File::Spec;
                         my $fullpath = File::Spec->catfile($c->base_dir(), $fname);
                         $static_file_cache{$fname} = (stat $fullpath)[9];
                     }
-                    return $c->uri_for($fname, { 't' => $static_file_cache{$fname} });
+                    return $c->uri_for($fname, { 't' => $static_file_cache{$fname} || 0 });
                 }
             },
         },
@@ -48,32 +44,28 @@ use File::Spec;
 }
 
 
-use HTTP::Session::Store::File;
+# load plugins
 __PACKAGE__->load_plugins(
-    'Web::HTTPSession' => {
-        state => 'Cookie',
-        store => HTTP::Session::Store::File->new(
-            dir => File::Spec->tmpdir(),
-        )
-    },
+    'Web::FillInFormLite',
+    'Web::CSRFDefender',
 );
-
-__PACKAGE__->load_plugin(qw/Web::JSON/);
-
-__PACKAGE__->load_plugin(qw/Web::CSRFDefender/);
-
-__PACKAGE__->load_plugin(qw/Web::FillInFormLite/);
-
-__PACKAGE__->load_plugin(qw/Web::NoCache/);
-
 
 # for your security
 __PACKAGE__->add_trigger(
     AFTER_DISPATCH => sub {
         my ( $c, $res ) = @_;
+
+        # http://blogs.msdn.com/b/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
         $res->header( 'X-Content-Type-Options' => 'nosniff' );
+
+        # http://blog.mozilla.com/security/2010/09/08/x-frame-options/
+        $res->header( 'X-Frame-Options' => 'DENY' );
+
+        # Cache control.
+        $res->header( 'Cache-Control' => 'private' );
     },
 );
+
 __PACKAGE__->add_trigger(
     BEFORE_DISPATCH => sub {
         my ( $c ) = @_;
@@ -83,4 +75,3 @@ __PACKAGE__->add_trigger(
 );
 
 1;
-
