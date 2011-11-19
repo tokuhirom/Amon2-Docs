@@ -39,6 +39,8 @@ Documents:
 
    amon3.rst
 
+   sample-code.rst
+
 And class reference is available on CPAN. Please see http://search.cpan.org/dist/Amon2 .
 
 .. TODO: l10n
