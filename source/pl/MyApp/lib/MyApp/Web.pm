@@ -1,6 +1,7 @@
 package MyApp::Web;
 use strict;
 use warnings;
+use utf8;
 use parent qw/MyApp Amon2::Web/;
 use File::Spec;
 
@@ -19,7 +20,7 @@ use Text::Xslate;
     }
     my $view = Text::Xslate->new(+{
         'syntax'   => 'TTerse',
-        'module'   => [ 'Text::Xslate::Bridge::TT2Like' ],
+        'module'   => [ 'Text::Xslate::Bridge::Star' ],
         'function' => {
             c => sub { Amon2->context() },
             uri_with => sub { Amon2->context()->req->uri_with(@_) },
@@ -46,7 +47,6 @@ use Text::Xslate;
 # load plugins
 __PACKAGE__->load_plugins(
     'Web::FillInFormLite',
-    'Web::NoCache', # do not cache the dynamic content by default
     'Web::CSRFDefender',
 );
 
@@ -54,7 +54,15 @@ __PACKAGE__->load_plugins(
 __PACKAGE__->add_trigger(
     AFTER_DISPATCH => sub {
         my ( $c, $res ) = @_;
+
+        # http://blogs.msdn.com/b/ie/archive/2008/07/02/ie8-security-part-v-comprehensive-protection.aspx
         $res->header( 'X-Content-Type-Options' => 'nosniff' );
+
+        # http://blog.mozilla.com/security/2010/09/08/x-frame-options/
+        $res->header( 'X-Frame-Options' => 'DENY' );
+
+        # Cache control.
+        $res->header( 'Cache-Control' => 'private' );
     },
 );
 

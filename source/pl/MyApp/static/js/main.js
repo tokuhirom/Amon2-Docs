@@ -1,3 +1,3 @@
 $(function () {
     $('#topbar').dropdown();
-})();
+});

@@ -1,6 +1,7 @@
 package MyApp::Web::Dispatcher;
 use strict;
 use warnings;
+use utf8;
 use Amon2::Web::Dispatcher::Lite;
 
 any '/' => sub {
@@ -8,7 +9,7 @@ any '/' => sub {
     $c->render('index.tt');
 };
 
-get '/account/logout' => sub {
+post '/account/logout' => sub {
     my ($c) = @_;
     $c->session->expire();
     $c->redirect('/');
