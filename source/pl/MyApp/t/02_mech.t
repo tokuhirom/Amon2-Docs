@@ -1,5 +1,6 @@
 use strict;
 use warnings;
+use utf8;
 use t::Util;
 use Plack::Test;
 use Plack::Util;
@@ -11,6 +12,5 @@ my $app = Plack::Util::load_psgi 'app.psgi';
 my $mech = Test::WWW::Mechanize::PSGI->new(app => $app);
 $mech->get_ok('/');
 
-$mech->get_ok('/account/logout');
 
 done_testing();

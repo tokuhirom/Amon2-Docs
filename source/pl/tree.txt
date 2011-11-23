@@ -1,5 +1,4 @@
 source/pl/MyApp/
-├── Makefile.PL
 ├── app.psgi
 ├── config
 │   ├── deployment.pl
@@ -12,6 +11,7 @@ source/pl/MyApp/
 │   │   │   └── Dispatcher.pm
 │   │   └── Web.pm
 │   └── MyApp.pm
+├── Makefile.PL
 ├── sql
 │   ├── mysql.sql
 │   └── sqlite.sql
@@ -23,12 +23,13 @@ source/pl/MyApp/
 │   ├── 504.html
 │   ├── bootstrap
 │   │   ├── bootstrap-dropdown.js
-│   │   └── bootstrap.min.css
+│   │   ├── bootstrap.min.css
+│   │   └── bootstrap-twipsy.js
 │   ├── css
 │   │   └── main.css
 │   ├── img
 │   ├── js
-│   │   ├── jquery-1.6.4.min.js
+│   │   ├── jquery-1.7.min.js
 │   │   └── main.js
 │   └── robots.txt
 ├── t
@@ -36,13 +37,15 @@ source/pl/MyApp/
 │   ├── 01_root.t
 │   ├── 02_mech.t
 │   ├── 03_assets.t
+│   ├── 06_jslint.t
 │   └── Util.pm
 ├── tmpl
 │   ├── include
-│   │   └── layout.tt
+│   │   ├── layout.tt
+│   │   └── pager.tt
 │   └── index.tt
 └── xt
     ├── 02_perlcritic.t
     └── 03_pod.t
 
-15 directories, 30 files
+15 directories, 33 files

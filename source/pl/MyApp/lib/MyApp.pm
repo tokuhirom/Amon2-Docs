@@ -1,6 +1,7 @@
 package MyApp;
 use strict;
 use warnings;
+use utf8;
 use parent qw/Amon2/;
 our $VERSION='0.01';
 use 5.008001;
@@ -16,9 +17,9 @@ sub setup_schema {
     my $fname = lc("sql/${driver_name}.sql");
     open my $fh, '<:encoding(UTF-8)', $fname or die "$fname: $!";
     my $source = do { local $/; <$fh> };
-	for my $stmt (split /;/, $source) {
-		$dbh->do($stmt) or die $dbh->errstr();
-	}
+    for my $stmt (split /;/, $source) {
+        $dbh->do($stmt) or die $dbh->errstr();
+    }
 }
 
 1;

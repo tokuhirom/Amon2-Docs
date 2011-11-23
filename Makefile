@@ -53,6 +53,7 @@ source/pl/tree.txt:
 	tree source/pl/MyApp/ > source/pl/tree.txt
 
 html: source/pl/BBS/Makefile.PL source/pl/tree.txt
+	mkdir -p build/html/
 	cp source/_templates/index.html build/html/index.html
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo

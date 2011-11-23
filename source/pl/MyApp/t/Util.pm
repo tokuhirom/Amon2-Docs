@@ -3,9 +3,9 @@ BEGIN {
     unless ($ENV{PLACK_ENV}) {
         $ENV{PLACK_ENV} = 'test';
     }
-	if ($ENV{PLACK_ENV} eq 'deployment') {
-		die "Do not run a test script on deployment environment";
-	}
+    if ($ENV{PLACK_ENV} eq 'deployment') {
+        die "Do not run a test script on deployment environment";
+    }
 }
 use File::Spec;
 use File::Basename;
@@ -18,7 +18,7 @@ our @EXPORT = qw(slurp);
 
 {
     # utf8 hack.
-    binmode Test::More->builder->$_, ":utf8" for qw/output failure_output todo_output/;                       
+    binmode Test::More->builder->$_, ":utf8" for qw/output failure_output todo_output/;
     no warnings 'redefine';
     my $code = \&Test::Builder::child;
     *Test::Builder::child = sub {
@@ -32,9 +32,9 @@ our @EXPORT = qw(slurp);
 
 
 sub slurp {
-	my $fname = shift;
-	open my $fh, '<:encoding(UTF-8)', $fname or die "$fname: $!";
-	do { local $/; <$fh> };
+    my $fname = shift;
+    open my $fh, '<:encoding(UTF-8)', $fname or die "$fname: $!";
+    do { local $/; <$fh> };
 }
 
 # initialize database
