@@ -13,18 +13,19 @@
   <body id="index">
       <div class="container">
             <header>
+                <img src="_static/amon.jpg" class="amon" width="306" height="329" />
                 <h1 class="heading"><a href="index.html">
                     <span class="logo">Amon2</span></a></h1>
                 <span class="subtitle">Web application framework for Rapid web development</span>
             </header>
             <section class="row">
                 <h2>Amon2 is Fun</h2>
-                <div class="code"><span style="color: #cccccc">use Amon2::Lite;</span><br />
+                <div class="code"><span class="dark">use Amon2::Lite;</span><br />
 get '/' =&gt; sub {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;my $c = shift;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;return $c-&gt;create_response(200, [], ['Hello, world!']);<br />
 };<br />
-<span style="color: #cccccc">__PACKAGE__-&gt;to_app();</span></div>
+<span class="dark">__PACKAGE__-&gt;to_app();</span></div>
             </section>
             <section class="row">
                 <h2>And Easy to Setup</h2>

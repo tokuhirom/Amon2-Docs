@@ -22,7 +22,7 @@ header {
         font-size: 60%;
     }
 }
-pre.prettyprint, body#index .code {
+pre.prettyprint {
     border-radius: 8px;
     padding: 8px;
     background-color: #F2F2F2;
@@ -34,10 +34,33 @@ nav {
     background-color: #F2F2F2;
 }
 
+@prebgcolor: #732F2F;
+@onepointcolor: #732F2F;
+
 body#index {
+    background-color: #000000;
+    .amon {
+        border: 0;
+    }
+
+    a, a:hover {
+        color: #A62940;
+    }
+
+   .code {
+        background-color: @prebgcolor;
+        border-radius: 8px;
+        padding: 8px;
+        border: 1px solid darken(@prebgcolor, 10%);
+        margin-left: 20px;
+        color: lighten(@prebgcolor, 40%);
+        span.dark {
+            color: darken(@prebgcolor, 10%);
+        }
+    }
+
     header {
         @import "http://fonts.googleapis.com/css?family=Nothing+You+Could+Do";
-        margin-top: 40px;
         text-align: center;
         .logo {
             font-family: 'Nothing You Could Do', cursive;
@@ -61,6 +84,9 @@ body#index {
         h2 {
             font-family: 'Nothing You Could Do', cursive;
         }
+    }
+    footer {
+        border: 0;
     }
 }
 
