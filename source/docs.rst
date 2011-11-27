@@ -1,6 +1,3 @@
-Amon2 - Web application framework for Rapid web development
-===========================================================
-
 Amon2 is a yet another web application framework for Perl5.
 
 Features
