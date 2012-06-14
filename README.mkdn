@@ -7,3 +7,9 @@ Just type:
 
     % make spellcheck
 
+How can I setup this site?
+--------------------------
+
+    cpanm -nv IPC::System::Simple Amon2::DBI Amon2 HTML::FillInForm::Lite
+    sudo ln -s /usr/local/webapp/Amon2-Docs/etc/httpd/amon.64p.org.conf /etc/nginx/sites-enabled/amon.64p.org.conf
+
