@@ -8,7 +8,7 @@ use File::Spec;
 # dispatcher
 use BBS::Web::Dispatcher;
 sub dispatch {
-    return BBS::Web::Dispatcher->dispatch($_[0]) or die "response is not generated";
+    return (BBS::Web::Dispatcher->dispatch($_[0]) or die "response is not generated");
 }
 
 # setup view class
