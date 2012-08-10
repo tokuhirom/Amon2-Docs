@@ -6,6 +6,7 @@ You can extends project using Amon2 by a lot of CPAN modules.
 .. toctree::
    :maxdepth: 3
 
+   websocket.rst
    session.rst
    output.rst
    template.rst
