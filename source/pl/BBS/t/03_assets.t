@@ -11,7 +11,7 @@ test_psgi
     app => $app,
     client => sub {
         my $cb = shift;
-        for my $fname (qw(static/bootstrap/bootstrap.min.css robots.txt)) {
+        for my $fname (qw(static/bootstrap/bootstrap.css robots.txt)) {
             my $req = HTTP::Request->new(GET => "http://localhost/$fname");
             my $res = $cb->($req);
             is($res->code, 200, $fname) or diag $res->content;
