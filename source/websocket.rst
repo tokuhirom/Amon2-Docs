@@ -15,7 +15,7 @@ Amon2 using Protocol::WebSocket as a protocol parser, and Twiggy is a httpd. You
 CODE
 ----
 
-It's very easy to use.
+It's very easy to use.::
 
     any '/echo' => sub {
         my ($c) = @_;
