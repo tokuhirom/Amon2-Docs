@@ -49,8 +49,8 @@ copyright = u'2011, tokuhirom'
 # built documents.
 #
 # The short X.Y version.
-# version = subprocess.Popen(['perl', '-e' 'use Amon2; print $Amon2::VERSION'], stdout=subprocess.PIPE).communicate()[0]
-version='3.27'
+version = subprocess.Popen(['perl', '-e' 'use Amon2; print $Amon2::VERSION'], stdout=subprocess.PIPE).communicate()[0]
+# version='3.27'
 # The full version, including alpha/beta/rc tags.
 release = version
 
