@@ -34,16 +34,14 @@ our @EXPORT = qw(slurp);
 sub slurp {
     my $fname = shift;
     open my $fh, '<:encoding(UTF-8)', $fname or die "$fname: $!";
-    do { local $/; <$fh> };
+    scalar do { local $/; <$fh> };
 }
 
 # initialize database
 use BBS;
 {
     unlink 'db/test.db' if -f 'db/test.db';
-
-    my $c = BBS->new();
-    $c->setup_schema();
+    system("sqlite3 db/test.db < sql/sqlite.sql");
 }
 
 1;

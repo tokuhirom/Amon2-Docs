@@ -11,20 +11,49 @@ chdir $FindBin::Bin;
 
 rmtree 'BBS';
 
-eval "use Amon2::Plugin::DBI;1;" or system "cpanm", "Amon2::Plugin::DBI";
-
 system "amon2-setup.pl BBS";
 chdir 'BBS';
+system "cpanm --installdeps .";
 
 do_write('sql/sqlite.sql', slurp('sql/sqlite.sql') . "\n" . <<'...');
+CREATE TABLE IF NOT EXISTS sessions (
+    id           CHAR(72) PRIMARY KEY,
+    session_data TEXT
+);
+
 CREATE TABLE IF NOT EXISTS entry (
-    entry_id INTEGER NOT NULL PRIMARY KEY,
+    entry_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     body varchar(255) not null
 );
 ...
 
-system "sqlite3 development.db < sql/sqlite.sql";
-system "sqlite3 test.db < sql/sqlite.sql";
+system "sqlite3 db/development.db < sql/sqlite.sql";
+system "sqlite3 db/test.db < sql/sqlite.sql";
+
+do_write('lib/BBS/DB/Schema.pm', <<'...');
+package BBS::DB::Schema;
+use strict;
+use warnings;
+use utf8;
+
+use Teng::Schema::Declare;
+
+base_row_class 'BBS::DB::Row';
+
+table {
+    name 'sessions';
+    pk 'id';
+    columns qw(session_data);
+};
+
+table {
+    name 'entry';
+    pk 'entry_id';
+    columns qw(entry_id body);
+};
+
+1;
+...
 
 do_write('lib/BBS/Web/Dispatcher.pm', <<'...');
 package BBS::Web::Dispatcher;
@@ -36,10 +65,13 @@ use Amon2::Web::Dispatcher::Lite;
 any '/' => sub {
     my ($c) = @_;
 
-    my @entries = @{$c->dbh->selectall_arrayref(
-        q{SELECT * FROM entry ORDER BY entry_id DESC LIMIT 10},
-        {Slice => {}}
-    )};
+    my @entries = $c->db->search(
+        entry => {
+        }, {
+            order_by => 'entry_id DESC',
+            limit    => 10,
+        }
+    );
     return $c->render( "index.tt" => { entries => \@entries, } );
 };
 
@@ -47,9 +79,11 @@ post '/post' => sub {
     my ($c) = @_;
 
     if (my $body = $c->req->param('body')) {
-        $c->dbh->insert(entry => +{
-            body => $body,
-        });
+        $c->db->insert(
+            entry => +{
+                body => $body,
+            }
+        );
     }
     return $c->redirect('/');
 };
@@ -101,8 +135,7 @@ done_testing;
 
 unlink 't/02_mech.t';
 
-system "perl Makefile.PL";
-system "make test";
+system "prove -lr t";
 
 # ------------------------------------------------------------------------- 
 # DSL

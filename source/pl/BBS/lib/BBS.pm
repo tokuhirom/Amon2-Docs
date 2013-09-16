@@ -3,24 +3,28 @@ use strict;
 use warnings;
 use utf8;
 use parent qw/Amon2/;
-our $VERSION='0.01';
+our $VERSION='4.01';
 use 5.008001;
+use BBS::DB::Schema;
+use BBS::DB;
 
-__PACKAGE__->load_plugin(qw/DBI/);
+my $schema = BBS::DB::Schema->instance;
 
-# initialize database
-use DBI;
-sub setup_schema {
-    my $self = shift;
-    my $dbh = $self->dbh();
-    my $driver_name = $dbh->{Driver}->{Name};
-    my $fname = lc("sql/${driver_name}.sql");
-    open my $fh, '<:encoding(UTF-8)', $fname or die "$fname: $!";
-    my $source = do { local $/; <$fh> };
-    for my $stmt (split /;/, $source) {
-        next unless $stmt =~ /\S/;
-        $dbh->do($stmt) or die $dbh->errstr();
+sub db {
+    my $c = shift;
+    if (!exists $c->{db}) {
+        my $conf = $c->config->{DBI}
+            or die "Missing configuration about DBI";
+        $c->{db} = BBS::DB->new(
+            schema       => $schema,
+            connect_info => [@$conf],
+            # I suggest to enable following lines if you are using mysql.
+            # on_connect_do => [
+            #     'SET SESSION sql_mode=STRICT_TRANS_TABLES;',
+            # ],
+        );
     }
+    $c->{db};
 }
 
 1;

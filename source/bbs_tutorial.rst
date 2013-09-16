@@ -17,6 +17,10 @@ Put sql/sqlite.sql.
 
 .. literalinclude:: pl/BBS/sql/sqlite.sql
 
+And apply the schema.
+
+    % sqlite3 db/development.db < sql/sqlite.sql
+
 You can find the configuration about RDBMS is config/development.pl
 
 .. literalinclude:: pl/BBS/config/development.pl
@@ -30,6 +34,13 @@ You can run the testing web server with following command::
     HTTP::Server::PSGI: Accepting connections at http://0:5000/
 
 Then, you can access the http://0.5000/ for testing.
+
+Put Teng schema
+---------------
+
+Open and edit lib/BBS/DB/Schema.pm like following:
+
+.. literalinclude:: pl/BBS/lib/BBS/DB/Schema.pm
 
 Implement controller
 --------------------

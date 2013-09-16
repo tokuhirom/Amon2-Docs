@@ -8,15 +8,13 @@ use Plack::Builder;
 
 use BBS::Web;
 use BBS;
-use Plack::Session::Store::DBI;
+use Plack::Session::Store::File;
 use Plack::Session::State::Cookie;
-use DBI;
+use URI::Escape;
+use File::Path ();
 
-{
-    my $c = BBS->new();
-    $c->setup_schema();
-}
-my $db_config = BBS->config->{DBI} || die "Missing configuration for DBI";
+my $session_dir = File::Spec->catdir(File::Spec->tmpdir, uri_escape("BBS") . "-$<" );
+File::Path::mkpath($session_dir);
 builder {
     enable 'Plack::Middleware::Static',
         path => qr{^(?:/static/)},
@@ -25,12 +23,12 @@ builder {
         path => qr{^(?:/robots\.txt|/favicon\.ico)$},
         root => File::Spec->catdir(dirname(__FILE__), 'static');
     enable 'Plack::Middleware::ReverseProxy';
+
+    # If you want to run the app on multiple servers,
+    # you need to use Plack::Sesion::Store::DBI or ::Store::Cache.
     enable 'Plack::Middleware::Session',
-        store => Plack::Session::Store::DBI->new(
-            get_dbh => sub {
-                DBI->connect( @$db_config )
-                    or die $DBI::errstr;
-            }
+        store => Plack::Session::Store::File->new(
+            dir => $session_dir,
         ),
         state => Plack::Session::State::Cookie->new(
             httponly => 1,
