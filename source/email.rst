@@ -1,7 +1,7 @@
 E-mail
 ======
 
-Amon2 does not support E-mail thing especially. But you can send e-mail by CPAN module!
+Amon2 does not support any E-mail related feature specifically. But you can send e-mail using CPAN modules!
 
 Sending E-mail with Email::Sender
 ---------------------------------
@@ -25,12 +25,12 @@ You can send e-mail very easy!::
 
     Email::Sender::Simple->send( $message );
 
-If you don't want to depend to Moose for bootstrap time or memory saving, you can try to Email::Send instead.
+If you don't want to depend on  Moose for bootstrap time or memory saving, you can try  Email::Send instead.
 
 Receiving E-mail
 ----------------
 
-Yes. It is not a topic for Amon2.
+Well, this is not a topic for Amon2.
 
 Please read `Email::MIME <http://search.cpan.org/perldoc?Email::MIME>`_ docs.
 

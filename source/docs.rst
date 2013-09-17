@@ -1,23 +1,23 @@
-Amon2 is a yet another web application framework for Perl5.
+Amon2 is yet another web application framework for Perl5.
 
 Features
 -------------
 
-Amon2 is a yet another web application framework for Perl5.
+Amon2 is yet another web application framework for Perl5.
 
-Amon2 have following features:
+Amon2 has the following features:
 
-    * PSGI/Plack based
-    * no Mo[uo]se required.
-    * no XS dependencies are required.
+    * Based on PSGI/Plack.
+    * No Mo[uo]se required.
+    * No XS dependencies are required.
     * Very thin.
-    * Easy to learn
-    * Split web related layers and other layer.
-    * Support CLI
-    * Less trouble
-    * Compatibility
+    * Easy to learn.
+    * Splits web related layers and non-web layers.
+    * Supports CLI.
+    * Less trouble.
+    * Compatibility.
        * I don't make incompatible changes, as possible.
-       * If I *really* need incompatible change, I release Amon3 :P
+       * If I *really* need an incompatible change, I will release Amon3 :P
 
 
 Documents:
@@ -40,7 +40,7 @@ Documents:
 
    sample-code.rst
 
-And class reference is available on CPAN. Please see http://search.cpan.org/dist/Amon2 .
+The class reference is available on CPAN. Please see http://search.cpan.org/dist/Amon2 .
 
 .. TODO: l10n
 

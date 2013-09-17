@@ -4,11 +4,11 @@ Outputting data other than HTML
 JSON
 ----
 
-Amon2::Plugin::Web::JSON support to output JSON. You can load it as::
+Amon2::Plugin::Web::JSON supports output in JSON format. You can load it as::
 
     __PACKAGE__->load_plugin(qw/JSON/);
 
-And use it as following::
+And use it as follows::
 
     sub dispatch {
         my $c = shift;
