@@ -1,7 +1,7 @@
 Architecture of Amon2
 =====================
 
-This is a architecture specification of Amon2.
+This is the architecture specification of Amon2.
 
 .. toctree::
    :maxdepth: 3

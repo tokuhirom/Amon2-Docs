@@ -1,12 +1,12 @@
 Japanese Mobile Phones
 ======================
 
-Japanese mobile phones have a very strange specs.
+Japanese mobile phones have very strange specs.
 
 Detect phone informations from HTTP headers
 -------------------------------------------
 
-You can use HTTP::MobileAgent module to get a informantions from HTTP headers.
+You can use HTTP::MobileAgent module to get informantion from HTTP headers.
 
 You would use Amon2::Plugin::Web::MobileAgent for this purpose. Install it from CPAN.::
 
@@ -79,5 +79,5 @@ You can use HTTP::Session for this purpose::
         },
     });
 
-But I don't recommend to use StickyQuery. It makes vulnerability.
+But I don't recommend to use StickyQuery. It adds vulnerability.
 

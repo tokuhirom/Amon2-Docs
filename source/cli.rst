@@ -1,7 +1,7 @@
 CLI(Command Line Interface)
 ===========================
 
-Most of the web application have a command line scripts. Amon2 supports it.
+Most web applications have command line scripts. Amon2 supports this feature.
 
 You can use the context object on CLI::
 
@@ -13,9 +13,9 @@ You can use the context object on CLI::
 
     my $c = MyApp->bootstrap();
 
-``$c`` is a instance of MyApp. And you can access it by ``$Amon2::CONTEXT``.
+``$c`` is a instance of MyApp. You can access to it via ``$Amon2::CONTEXT``.
 
-When you write some methods on context object, you should think "Is this web context only thing? or not ?". If the thing is not only web specific, you write it on MyApp.pm, then you can use it under the CLI.
+When you write some methods on context object, you should think in the following way: "Is this a web-context only feature? Or not ?". If your feature is not only web specific, you write it on MyApp.pm module, so you can use it under the CLI.
 
-You can use this technique on other than CLI, like job queue worker, AnyEvent daemon, etc, etc.
+This technique goes beyond CLI. You can apply it for job queue workers, AnyEvent daemons, etc, etc.
 
