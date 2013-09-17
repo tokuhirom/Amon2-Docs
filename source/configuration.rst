@@ -1,7 +1,7 @@
 Configuration
 =============
 
-Amon2 uses .pl file as configuration file. It provides full of flexibility.
+Amon2 uses a perl script .pl file as the configuration file. It provides full flexibility.
 
 amon2-setup.pl makes following code by default::
 

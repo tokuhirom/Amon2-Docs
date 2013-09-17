@@ -3,7 +3,7 @@ Flavors
 
 This document describes Amon2's Flavor architecture.
 
-Amon2 provides a setup script helper. It was full rewrote at Amon2 2.60.
+Amon2 provides a setup script helper. It was completely rewritten at Amon2 2.60.
 
 Properties
 ----------
@@ -70,12 +70,12 @@ This property indicates a path of web context class. It is normally lib/<<PATH>>
 Path rewriting
 --------------
 
-Amon2::Setup rewrite a template path for normalization.
+Amon2::Setup rewrites a template path for normalization.
 
 <<PATH>>
 ~~~~~~~~
 
-<<PATH>> rewrite as a directory path from module name. e.g. "My/App"::
+<<PATH>> rewrites as a directory path from module name. e.g. "My/App"::
 
     lib/<<PATH>>.pm → lib/My/App.pm
     lib/<<PATH>>/Web.pm → lib/My/App/Web.pm
@@ -83,14 +83,14 @@ Amon2::Setup rewrite a template path for normalization.
 <<WEB_CONTEXT_PATH>>
 ~~~~~~~~~~~~~~~~~~~~
 
-This path indicates a path for web context object. e.g.:
+This indicates a path for web context object. e.g.:
 
     <<WEB_CONTEXT_PATH>> → lib/<<PATH>>/Web.pm
 
 <<CONTEXT_PATH>>
 ~~~~~~~~~~~~~~~~
 
-This path indicates a path for context object. e.g.:
+This indicates a path for context object. e.g.:
 
     <<CONTEXT_PATH>> → lib/<<PATH>>.pm
 

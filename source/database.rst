@@ -6,13 +6,13 @@ DBI
 
 Amon2 provides ``Amon2::DBI`` with splitted package `Amon2-DBI <http://search.cpan.org/dist/Amon2-DBI/>`_.
 
-``Amon2::DBI`` provides following features on DBI:
+``Amon2::DBI`` provides the following features on DBI:
 
     * Better error message
     * RAII style transaction management(DBIx::TransactionManager)
     * SQL construction helper(with SQL::Interp)
 
-You can install it by following one liner::
+You can install it by following this one liner::
 
     % curl -L http://cpanmin.us | perl - Amon2::DBI
 
@@ -26,26 +26,26 @@ Then you can access the instance of DBI, you can call ``$c->dbh``.
 Transaction management
 ~~~~~~~~~~~~~~~~~~~~~~
 
-You can use it as following::
+You can use it as follows::
 
     my $dbh = Amon2::DBI->connect(...);
     my $txn = $dbh->txn_scope();
     ...
     $txn->commit();
 
-You can handle nested transaction.
+You can handle nested transactions.
 
 For more details please access `DBIx::TransactionManager <http://search.cpan.org/perldoc?DBIx::TransactionManager>`_.
 
 SQL helper
 ~~~~~~~~~~
 
-For your convenience, ``Amon2::DBI`` provides following helper methods.
+For your convenience, ``Amon2::DBI`` provides the following helper methods.
 
 $dbh->do_i(@args)
 ``````````````````
 
-This method construct SQL using ``SQL::Interp::sql_interp`` and do it.
+This method constructs SQL using ``SQL::Interp::sql_interp`` and executes  it.
 
 $dbh->insert($table, \%row);
 ````````````````````````````
@@ -57,12 +57,12 @@ This is equivalent to::
 Teng
 ----
 
-Amon2 does not support O/R Mapper especially.
-But you can integrate every O/R mappers very easy!
+Amon2 does not support any specific O/R Mapper by default.
+But you can integrate any O/R mapper very easily!
 
 This article provides tutorial for using `Teng <http://search.cpan.org/perldoc?Teng>`_ with Amon2.
 
-And write constructor for context object::
+And write a constructor for context object::
 
     package MyApp;
     use parent qw/Amon2/;

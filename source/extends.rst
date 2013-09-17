@@ -1,7 +1,7 @@
 Extends Amon2
 =============
 
-You can extends project using Amon2 by a lot of CPAN modules.
+You can extend your project using Amon2 with a lot of CPAN modules.
 
 .. toctree::
    :maxdepth: 3
