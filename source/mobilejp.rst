@@ -6,7 +6,7 @@ Japanese mobile phones have very strange specs.
 Detect phone informations from HTTP headers
 -------------------------------------------
 
-You can use HTTP::MobileAgent module to get informantion from HTTP headers.
+You can use HTTP::MobileAgent module to get information from HTTP headers.
 
 You would use Amon2::Plugin::Web::MobileAgent for this purpose. Install it from CPAN.::
 
