@@ -1,0 +1,16 @@
+: cascade "include/layout.tx"
+
+: override content -> {
+
+<form method="post" action="<: uri_for('/post') :>">
+    <input type="text" name="body" />
+    <input type="submit" value="Send" />
+</form>
+
+<ul>
+    <: for $entries -> $entry { :>
+    <li><: $entry.entry_id :>. <: $entry.body :></li>
+    <: } :>
+</ul>
+
+: }

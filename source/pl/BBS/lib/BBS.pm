@@ -2,11 +2,14 @@ package BBS;
 use strict;
 use warnings;
 use utf8;
-use parent qw/Amon2/;
-our $VERSION='4.01';
+our $VERSION='0.01';
 use 5.008001;
 use BBS::DB::Schema;
 use BBS::DB;
+
+use parent qw/Amon2/;
+# Enable project local mode.
+__PACKAGE__->make_local_context();
 
 my $schema = BBS::DB::Schema->instance;
 

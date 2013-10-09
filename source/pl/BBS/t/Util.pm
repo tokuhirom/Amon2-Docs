@@ -3,18 +3,20 @@ BEGIN {
     unless ($ENV{PLACK_ENV}) {
         $ENV{PLACK_ENV} = 'test';
     }
-    if ($ENV{PLACK_ENV} eq 'deployment') {
+    if ($ENV{PLACK_ENV} eq 'production') {
         die "Do not run a test script on deployment environment";
     }
 }
 use File::Spec;
 use File::Basename;
-use lib File::Spec->rel2abs(File::Spec->catdir(dirname(__FILE__), '..', 'extlib', 'lib', 'perl5'));
 use lib File::Spec->rel2abs(File::Spec->catdir(dirname(__FILE__), '..', 'lib'));
 use parent qw/Exporter/;
 use Test::More 0.98;
 
-our @EXPORT = qw(slurp);
+our @EXPORT = qw(
+    slurp
+
+);
 
 {
     # utf8 hack.
@@ -43,5 +45,6 @@ use BBS;
     unlink 'db/test.db' if -f 'db/test.db';
     system("sqlite3 db/test.db < sql/sqlite.sql");
 }
+
 
 1;

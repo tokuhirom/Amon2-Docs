@@ -2,34 +2,12 @@ use strict;
 use warnings;
 use Module::Build;
 use Module::CPANfile;
+use builder::MyBuilder;
 
 my $file = Module::CPANfile->load("cpanfile");
 my $prereq = $file->prereq_specs;
 
-my $build = Module::Build->subclass(
-    code => q{
-        sub ACTION_install {
-            die "Do not install web application.\n";
-        }
-
-        # do not make blib.
-        sub ACTION_code {
-            my $self = shift;
-            $self->depends_on('config_data');
-        }
-
-        # run prove
-        sub ACTION_test {
-            my $self = shift;
-            my $tests = $self->find_test_files;
-
-            require App::Prove;
-            my $prove = App::Prove->new();
-            $prove->process_args('-l', @$tests);
-            $prove->run();
-        }
-    }
-)->new(
+my $build = builder::MyBuilder->new(
     license              => 'unknown',
     dynamic_config       => 0,
 
@@ -44,6 +22,7 @@ my $build = Module::Build->subclass(
         perl => '5.008001',
         %{$prereq->{runtime}->{requires}},
     },
+    script_files => [glob('script/*'), glob('bin/*')],
 
     no_index    => { 'directory' => [ 'inc' ] },
     name        => 'BBS',

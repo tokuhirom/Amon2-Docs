@@ -5,6 +5,7 @@ use utf8;
 use Carp ();
 use File::Spec ();
 
+use File::ShareDir;
 use Text::Xslate 1.6001;
 use BBS::Web::ViewFunctions;
 
@@ -15,10 +16,22 @@ sub make_instance {
 
     my $view_conf = $context->config->{'Text::Xslate'} || +{};
     unless (exists $view_conf->{path}) {
-        $view_conf->{path} = [ File::Spec->catdir($context->base_dir(), 'tmpl') ];
+        my $tmpl_path = File::Spec->catdir($context->base_dir(), 'tmpl');
+        if ( -d $tmpl_path ) {
+            # tmpl
+            $view_conf->{path} = [ $tmpl_path ];
+        } else {
+            my $share_tmpl_path = eval { File::Spec->catdir(File::ShareDir::dist_dir('BBS'), 'tmpl') };
+            if ($share_tmpl_path) {
+                # This application was installed to system.
+                $view_conf->{path} = [ $share_tmpl_path ];
+            } else {
+                Carp::croak("Can't find template directory. tmpl Is not available.");
+            }
+        }
     }
     my $view = Text::Xslate->new(+{
-        'syntax'   => 'TTerse',
+        'syntax'   => 'Kolon',
         'module'   => [
             'Text::Xslate::Bridge::Star',
             'BBS::Web::ViewFunctions',
