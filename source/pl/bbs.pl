@@ -72,7 +72,7 @@ any '/' => sub {
             limit    => 10,
         }
     );
-    return $c->render( "index.tt" => { entries => \@entries, } );
+    return $c->render( "index.tx" => { entries => \@entries, } );
 };
 
 post '/post' => sub {
@@ -91,21 +91,23 @@ post '/post' => sub {
 1;
 ...
 
-do_write('tmpl/index.tt', <<'...');
-[% WRAPPER 'include/layout.tt' %]
+do_write('tmpl/index.tx', <<'...');
+: cascade "include/layout.tx"
 
-<form method="post" action="[% uri_for('/post') %]">
+: override content -> {
+
+<form method="post" action="<: uri_for('/post') :>">
     <input type="text" name="body" />
     <input type="submit" value="Send" />
 </form>
 
 <ul>
-[% FOR entry IN entries %]
-    <li>[% entry.entry_id %]. [% entry.body %]</li>
-[% END %]
+    <: for $entries -> $entry { :>
+    <li><: $entry.entry_id :>. <: $entry.body :></li>
+    <: } :>
 </ul>
 
-[% END %]
+: }
 ...
 
 do_write('t/01_root.t', <<'...');
@@ -118,7 +120,7 @@ use Test::More;
 use lib 'lib';
 use BBS;
 
-my $app = Plack::Util::load_psgi 'app.psgi';
+my $app = Plack::Util::load_psgi 'script/bbs-server';
 
 test_psgi
     app => $app,

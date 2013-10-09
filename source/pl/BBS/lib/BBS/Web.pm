@@ -22,8 +22,12 @@ __PACKAGE__->load_plugins(
 # setup view
 use BBS::Web::View;
 {
-    my $view = BBS::Web::View->make_instance(__PACKAGE__);
-    sub create_view { $view }
+    sub create_view {
+        my $view = BBS::Web::View->make_instance(__PACKAGE__);
+        no warnings 'redefine';
+        *BBS::Web::create_view = sub { $view }; # Class cache.
+        $view
+    }
 }
 
 # for your security

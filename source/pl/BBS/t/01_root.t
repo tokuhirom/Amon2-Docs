@@ -7,7 +7,7 @@ use Test::More;
 use lib 'lib';
 use BBS;
 
-my $app = Plack::Util::load_psgi 'app.psgi';
+my $app = Plack::Util::load_psgi 'script/bbs-server';
 
 test_psgi
     app => $app,

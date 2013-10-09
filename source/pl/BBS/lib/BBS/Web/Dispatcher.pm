@@ -14,7 +14,7 @@ any '/' => sub {
             limit    => 10,
         }
     );
-    return $c->render( "index.tt" => { entries => \@entries, } );
+    return $c->render( "index.tx" => { entries => \@entries, } );
 };
 
 post '/post' => sub {

@@ -52,9 +52,9 @@ Open and edit lib/BBS/Web/Dispatcher.pm as follows:
 Edit template
 --------------
 
-Open and edit tmpl/index.tt as follows:
+Open and edit tmpl/index.tx as follows:
 
-.. literalinclude:: pl/BBS/tmpl/index.tt
+.. literalinclude:: pl/BBS/tmpl/index.tx
 
 That's all.
 -----------
