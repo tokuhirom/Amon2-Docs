@@ -2,24 +2,32 @@ package MyApp;
 use strict;
 use warnings;
 use utf8;
-use parent qw/Amon2/;
-our $VERSION='0.01';
+our $VERSION='5.03';
 use 5.008001;
+use MyApp::DB::Schema;
+use MyApp::DB;
 
-__PACKAGE__->load_plugin(qw/DBI/);
+use parent qw/Amon2/;
+# Enable project local mode.
+__PACKAGE__->make_local_context();
 
-# initialize database
-use DBI;
-sub setup_schema {
-    my $self = shift;
-    my $dbh = $self->dbh();
-    my $driver_name = $dbh->{Driver}->{Name};
-    my $fname = lc("sql/${driver_name}.sql");
-    open my $fh, '<:encoding(UTF-8)', $fname or die "$fname: $!";
-    my $source = do { local $/; <$fh> };
-    for my $stmt (split /;/, $source) {
-        $dbh->do($stmt) or die $dbh->errstr();
+my $schema = MyApp::DB::Schema->instance;
+
+sub db {
+    my $c = shift;
+    if (!exists $c->{db}) {
+        my $conf = $c->config->{DBI}
+            or die "Missing configuration about DBI";
+        $c->{db} = MyApp::DB->new(
+            schema       => $schema,
+            connect_info => [@$conf],
+            # I suggest to enable following lines if you are using mysql.
+            # on_connect_do => [
+            #     'SET SESSION sql_mode=STRICT_TRANS_TABLES;',
+            # ],
+        );
     }
+    $c->{db};
 }
 
 1;
