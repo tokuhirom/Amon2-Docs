@@ -17,7 +17,7 @@ Put the following in sql/sqlite.sql:
 
 .. literalinclude:: pl/BBS/sql/sqlite.sql
 
-And apply the schema:
+And apply the schema::
 
     % sqlite3 db/development.db < sql/sqlite.sql
 
@@ -30,15 +30,15 @@ Run the web server
 
 You can run the testing web server with the following command::
 
-    % plackup app.psgi
-    HTTP::Server::PSGI: Accepting connections at http://0:5000/
+    % perl -Ilib script/bbs-server
+    BBS: http://127.0.0.1:5000/
 
-, where 5000 is the default port. Then, you can access http://0.5000/ for testing and debugging.
+, where 5000 is the default port. Then, you can access http://0:5000/ for testing and debugging.
 
 Put Teng schema
 ---------------
 
-Open and edit lib/BBS/DB/Schema.pm as follows::
+Open and edit lib/BBS/DB/Schema.pm as follows:
 
 .. literalinclude:: pl/BBS/lib/BBS/DB/Schema.pm
 
