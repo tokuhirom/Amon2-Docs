@@ -4,7 +4,7 @@ Testing
 Basic Unit testing
 ------------------
 
-You can use ``perl Makefile.PL; make; make test`` flow,same as normal perl project. If you don't know about Perl5 testing, please read `Test::Tutorial <http://search.cpan.org/perldoc?Test::Tutorial>`_.
+You can use ``perl Build.PL; ./Build; ./Build test`` flow,same as normal perl project. If you don't know about Perl5 testing, please read `Test::Tutorial <http://search.cpan.org/perldoc?Test::Tutorial>`_.
 
 Test::WWW::Mechanize::PSGI
 --------------------------
