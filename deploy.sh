@@ -4,5 +4,4 @@
 # cpanm -l ~/perl5/ --notest --no-man-pages JSON
 # cpanm -l ~/perl5/ --notest --no-man-pages `perl -E 'use JSON; say decode_json(qx{curl http://api.beta.metacpan.org/release/Amon2})->{download_url}'`
 
-yum install -y python-sphinx
 make html
