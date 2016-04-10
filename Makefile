@@ -42,17 +42,18 @@ clean:
 	rm source/pl/tree.txt
 	rm -rf src/MyApp/
 
-# source/pl/BBS/Makefile.PL: source/pl/bbs.pl
-# 	@perl source/pl/bbs.pl
+source/pl/BBS/Makefile.PL: source/pl/bbs.pl
+	@perl source/pl/bbs.pl
 
 reload: html
 	 osascript -e 'tell application "Google Chrome" to reload active tab of window 1'
 
-# source/pl/tree.txt:
-# 	cd source/pl/ && rm -rf MyApp && amon2-setup.pl MyApp
-# 	tree source/pl/MyApp/ > source/pl/tree.txt
+source/pl/tree.txt:
+	cd source/pl/ && rm -rf MyApp && amon2-setup.pl MyApp
+	tree source/pl/MyApp/ > source/pl/tree.txt
 
-# html: source/pl/BBS/Makefile.PL source/pl/tree.txt
+regencode: source/pl/BBS/Makefile.PL source/pl/tree.txt
+
 html:
 	mkdir -p build/html/
 	cp source/_templates/index.html build/html/index.html
