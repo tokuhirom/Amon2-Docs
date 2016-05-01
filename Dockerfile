@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y ca-certificates git openssl nginx pytho
     --no-install-recommends \
         && rm -rf /var/lib/apt/lists/*
 
-EXPOSE 80
+EXPOSE 8443
 
 RUN git clone https://github.com/tokuhirom/Amon2-Docs.git /amon2-docs
 WORKDIR /amon2-docs
