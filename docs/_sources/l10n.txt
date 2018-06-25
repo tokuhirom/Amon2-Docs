@@ -1,0 +1,7 @@
+Localization
+============
+
+This is a Japanese document, using Locale::Maketext::Lexicon.
+
+http://d.hatena.ne.jp/tokuhirom/20110224/1298521852
+

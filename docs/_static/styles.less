@@ -1,0 +1,99 @@
+a, a:hover {
+    color: #902028;
+}
+a.headerlink {
+    color: white;
+    font-size: 60%;
+    &:hover {
+        color: #902028;
+    }
+}
+header {
+    margin-top: 20px;
+
+    h1.heading {
+        margin-bottom: 4px;
+    }
+    h2.heading {
+        line-height: 24px;
+    }
+
+    .subtitle {
+        font-size: 60%;
+    }
+}
+pre.prettyprint {
+    border-radius: 8px;
+    padding: 8px;
+    background-color: #F2F2F2;
+    border: 1px solid darken(#F2F2F2, 10%);
+    margin-left: 20px;
+}
+nav {
+    text-align: right;
+    background-color: #F2F2F2;
+}
+
+@prebgcolor: #732F2F;
+@onepointcolor: #732F2F;
+
+body#index {
+    background-color: #000000;
+    .amon {
+        border: 0;
+    }
+
+    a, a:hover {
+        color: #A62940;
+    }
+
+   .code {
+        background-color: @prebgcolor;
+        border-radius: 8px;
+        padding: 8px;
+        border: 1px solid darken(@prebgcolor, 10%);
+        margin-left: 20px;
+        color: lighten(@prebgcolor, 40%);
+        span.dark {
+            color: darken(@prebgcolor, 10%);
+        }
+    }
+
+    header {
+        @import "http://fonts.googleapis.com/css?family=Nothing+You+Could+Do";
+        text-align: center;
+        .logo {
+            font-family: 'Nothing You Could Do', cursive;
+            font-size: 128px;
+            color: #A62940;
+        }
+        .subtitle {
+            font-family: 'Nothing You Could Do', cursive;
+            font-size: 24px;
+        }
+        a:hover {
+            text-decoration: none;
+        }
+    }
+    .container {
+        max-width: 600px;
+    }
+    .row {
+        margin-top: 20px;
+        margin-left: 0px;
+        margin-right: 0px;
+        h2 {
+            font-family: 'Nothing You Could Do', cursive;
+        }
+    }
+    footer {
+        border: 0;
+    }
+}
+
+footer {
+    text-align: right;
+    font-size: small;
+    margin-top: 0px;
+    padding-top: 8px;
+}

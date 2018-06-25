@@ -1,0 +1,98 @@
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Configuration &mdash; Amon2 6.13 documentation</title>
+    <!-- <link rel="stylesheet" href="_static/haiku.css" type="text/css" /> -->
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '6.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/"/>
+    <link rel="top" title="Amon2 6.13 documentation" href="index.html" />
+    <link rel="up" title="Architecture of Amon2" href="architecture.html" />
+    <link rel="next" title="Flavors" href="flavor.html" />
+    <link rel="prev" title="CLI(Command Line Interface)" href="cli.html" />
+    <link href="_static/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <link rel="stylesheet/less" type="text/css" href="_static/styles.less">
+    <script src="_static/less.js" type="text/javascript"></script>
+    <style>
+        body {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
+    <script type="text/javascript" src="_static/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('pre').addClass('prettyprint');
+            prettyPrint();
+        });
+    </script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+      <div class="container">
+            <header>
+                <h1 class="heading"><a href="docs.html">
+                    <span class="shorttitle">Amon2 6.13 documentation</span></a></h1>
+                <h2 class="heading"><span class="subtitle">Configuration</span></h2>
+            </header>
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="cli.html">CLI(Command Line Interface)</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="flavor.html">Flavors</a>&#160;&#160;»
+        </p>
+</nav>
+            
+        
+
+            
+  <div class="section" id="configuration">
+<h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>Amon2 uses a perl script .pl file as the configuration file. It provides full flexibility.</p>
+<p>amon2-setup.pl makes following code by default:</p>
+<div class="highlight-python"><pre>package MyApp;
+use parent qw/Amon2/;
+use Amon2::Config::Simple;
+sub load_config { Amon2::Config::Simple-&gt;load(shift) }</pre>
+</div>
+<p><tt class="docutils literal"><span class="pre">MyApp-&gt;load_config()</span></tt> is a class method to load configuration data.</p>
+<p><tt class="docutils literal"><span class="pre">Amon2::Config::Simple</span></tt> reads a <tt class="docutils literal"><span class="pre">&quot;config/$ENV{PLACK_ENV}.pl&quot;</span></tt> by default. If the <tt class="docutils literal"><span class="pre">$ENV{PLACK_ENV}</span></tt> is null, Amon2 uses <tt class="docutils literal"><span class="pre">&quot;config/$ENV{PLACK_ENV}.pl&quot;</span></tt> instead.</p>
+<p>If you want more flexibility, you can write your own configuration loader without <tt class="docutils literal"><span class="pre">Amon2::Config::Simple</span></tt> (e.g. Load configuration data from YAML, etc.).</p>
+</div>
+
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="cli.html">CLI(Command Line Interface)</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="flavor.html">Flavors</a>&#160;&#160;»
+        </p>
+</nav>
+        
+
+
+        <footer>
+            &copy; Copyright 2011, tokuhirom.
+        </footer>
+      </div>
+  </body>
+</html>

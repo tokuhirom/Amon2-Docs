@@ -1,0 +1,146 @@
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Architecture of Amon2 &mdash; Amon2 6.13 documentation</title>
+    <!-- <link rel="stylesheet" href="_static/haiku.css" type="text/css" /> -->
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '6.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/"/>
+    <link rel="top" title="Amon2 6.13 documentation" href="index.html" />
+    <link rel="next" title="Components" href="components.html" />
+    <link rel="prev" title="Tutorial - Create BBS site" href="bbs_tutorial.html" />
+    <link href="_static/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <link rel="stylesheet/less" type="text/css" href="_static/styles.less">
+    <script src="_static/less.js" type="text/javascript"></script>
+    <style>
+        body {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
+    <script type="text/javascript" src="_static/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('pre').addClass('prettyprint');
+            prettyPrint();
+        });
+    </script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+      <div class="container">
+            <header>
+                <h1 class="heading"><a href="docs.html">
+                    <span class="shorttitle">Amon2 6.13 documentation</span></a></h1>
+                <h2 class="heading"><span class="subtitle">Architecture of Amon2</span></h2>
+            </header>
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="bbs_tutorial.html">Tutorial - Create BBS site</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="components.html">Components</a>&#160;&#160;»
+        </p>
+</nav>
+            
+        
+
+            
+  <div class="section" id="architecture-of-amon2">
+<h1>Architecture of Amon2<a class="headerlink" href="#architecture-of-amon2" title="Permalink to this headline">¶</a></h1>
+<p>This is the architecture specification of Amon2.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Components</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="components.html#generic-context-object">Generic Context Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="components.html#myapp-load-config">MyApp-&gt;load_config()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#web-context-object">Web Context Object</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="components.html#myapp-web-create-request-env">MyApp::Web-&gt;create_request($env)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="components.html#myapp-web-create-response-code-headers-content">MyApp::Web-&gt;create_response($code, $headers, $content)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="components.html#myapp-web-create-view">MyApp::Web-&gt;create_view()</a></li>
+<li class="toctree-l3"><a class="reference internal" href="components.html#c-dispatch">$c-&gt;dispatch()</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#web-request-object">Web request object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="components.html#web-response-object">Web response Object</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="trigger.html">Triggers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="trigger.html#before-dispatch">BEFORE_DISPATCH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trigger.html#html-filter">HTML_FILTER</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trigger.html#after-dispatch">AFTER_DISPATCH</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI(Command Line Interface)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flavor.html">Flavors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="flavor.html#properties">Properties</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="flavor.html#is-standalone">is_standalone</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flavor.html#parent">parent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flavor.html#assets">assets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flavor.html#plugins">plugins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flavor.html#context-path">context_path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flavor.html#web-context-path">web_context_path</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="flavor.html#path-rewriting">Path rewriting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="flavor.html#path">&lt;&lt;PATH&gt;&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flavor.html#id1">&lt;&lt;WEB_CONTEXT_PATH&gt;&gt;</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flavor.html#id2">&lt;&lt;CONTEXT_PATH&gt;&gt;</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="flavor.html#templates">Templates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="flavor.html#template-cascading">Template Cascading</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plugin.html">Plugin</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="plugin.html#plugin-architecture">Plugin architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="plugin.html#flavor">Flavor</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="plugin.html#hook-points">Hook points</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="bbs_tutorial.html">Tutorial - Create BBS site</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="components.html">Components</a>&#160;&#160;»
+        </p>
+</nav>
+        
+
+
+        <footer>
+            &copy; Copyright 2011, tokuhirom.
+        </footer>
+      </div>
+  </body>
+</html>

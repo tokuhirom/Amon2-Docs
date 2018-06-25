@@ -1,0 +1,104 @@
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Logging &mdash; Amon2 6.13 documentation</title>
+    <!-- <link rel="stylesheet" href="_static/haiku.css" type="text/css" /> -->
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '6.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/"/>
+    <link rel="top" title="Amon2 6.13 documentation" href="index.html" />
+    <link rel="up" title="Extends Amon2" href="extends.html" />
+    <link rel="next" title="Profiling" href="profiling.html" />
+    <link rel="prev" title="E-mail" href="email.html" />
+    <link href="_static/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <link rel="stylesheet/less" type="text/css" href="_static/styles.less">
+    <script src="_static/less.js" type="text/javascript"></script>
+    <style>
+        body {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
+    <script type="text/javascript" src="_static/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('pre').addClass('prettyprint');
+            prettyPrint();
+        });
+    </script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+      <div class="container">
+            <header>
+                <h1 class="heading"><a href="docs.html">
+                    <span class="shorttitle">Amon2 6.13 documentation</span></a></h1>
+                <h2 class="heading"><span class="subtitle">Logging</span></h2>
+            </header>
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="email.html">E-mail</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="profiling.html">Profiling</a>&#160;&#160;»
+        </p>
+</nav>
+            
+        
+
+            
+  <div class="section" id="logging">
+<h1>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="log-minimal">
+<h2>Log::Minimal<a class="headerlink" href="#log-minimal" title="Permalink to this headline">¶</a></h2>
+<p>I recommend <a class="reference external" href="http://search.cpan.org/dist/Log-Minimal">Log::Minimal</a> for logging with Amon2. It&#8217;s very easy to use.</p>
+<p>You can install it with the following one liner:</p>
+<div class="highlight-python"><pre>% curl -L cpanm | perl - Log::Minimal</pre>
+</div>
+<p>And use it as:</p>
+<div class="highlight-python"><pre>use Log::Minimal;
+
+infof("foo");  # info level
+warnf("foo");  # warn level
+debugf("ddd"); # debugging level</pre>
+</div>
+<p>You can customize the output format with <cite>$Log::Minimal::PRINT</cite>. And you can select the log level with <cite>$Log::Minimal::LOG_LEVEL</cite>.</p>
+<p>For more details, please access to <a class="reference external" href="http://search.cpan.org/perldoc?Log::Minimal">Log::Minimal</a> pod.</p>
+</div>
+</div>
+
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="email.html">E-mail</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="profiling.html">Profiling</a>&#160;&#160;»
+        </p>
+</nav>
+        
+
+
+        <footer>
+            &copy; Copyright 2011, tokuhirom.
+        </footer>
+      </div>
+  </body>
+</html>

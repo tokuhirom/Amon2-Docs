@@ -1,0 +1,114 @@
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Testing &mdash; Amon2 6.13 documentation</title>
+    <!-- <link rel="stylesheet" href="_static/haiku.css" type="text/css" /> -->
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '6.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/"/>
+    <link rel="top" title="Amon2 6.13 documentation" href="index.html" />
+    <link rel="up" title="Extends Amon2" href="extends.html" />
+    <link rel="next" title="E-mail" href="email.html" />
+    <link rel="prev" title="Database Integration" href="database.html" />
+    <link href="_static/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <link rel="stylesheet/less" type="text/css" href="_static/styles.less">
+    <script src="_static/less.js" type="text/javascript"></script>
+    <style>
+        body {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
+    <script type="text/javascript" src="_static/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('pre').addClass('prettyprint');
+            prettyPrint();
+        });
+    </script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+      <div class="container">
+            <header>
+                <h1 class="heading"><a href="docs.html">
+                    <span class="shorttitle">Amon2 6.13 documentation</span></a></h1>
+                <h2 class="heading"><span class="subtitle">Testing</span></h2>
+            </header>
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="database.html">Database Integration</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="email.html">E-mail</a>&#160;&#160;»
+        </p>
+</nav>
+            
+        
+
+            
+  <div class="section" id="testing">
+<h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-unit-testing">
+<h2>Basic Unit testing<a class="headerlink" href="#basic-unit-testing" title="Permalink to this headline">¶</a></h2>
+<p>You can use <tt class="docutils literal"><span class="pre">perl</span> <span class="pre">Build.PL;</span> <span class="pre">./Build;</span> <span class="pre">./Build</span> <span class="pre">test</span></tt> flow,same as normal perl project. If you don&#8217;t know about Perl5 testing, please read <a class="reference external" href="http://search.cpan.org/perldoc?Test::Tutorial">Test::Tutorial</a>.</p>
+</div>
+<div class="section" id="test-www-mechanize-psgi">
+<h2>Test::WWW::Mechanize::PSGI<a class="headerlink" href="#test-www-mechanize-psgi" title="Permalink to this headline">¶</a></h2>
+<p>Test::WWW::Mechanize::PSGI is a very useful module for testing PSGI applications like Amon2 web application. I recommend this module for testing Amon2 application.</p>
+<p>You can write basic test like following:</p>
+<div class="highlight-python"><pre>use Test::WWW::Mechanize::PSGI
+use MyApp::Web;
+
+my $app = MyApp::Web-&gt;to_app();
+my $mech = Test::WWW::Mechanize::PSGI-&gt;new(app =&gt; $app);
+$mech-&gt;get_ok('http://localhost/'); # testing top page is OK</pre>
+</div>
+<div class="section" id="checking-broken-links">
+<h3>Checking broken links<a class="headerlink" href="#checking-broken-links" title="Permalink to this headline">¶</a></h3>
+<p>You can check broken link with <tt class="docutils literal"><span class="pre">$mech-&gt;page_links_ok()</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="how-do-i-mocking-time">
+<h2>How do I mocking time?<a class="headerlink" href="#how-do-i-mocking-time" title="Permalink to this headline">¶</a></h2>
+<p>You can use <a class="reference external" href="http://search.cpan.org/perldoc?Time::Mock">Time::Mock</a>.</p>
+<p>This module replaces core functions of Perl5.</p>
+<p>For more details, please access to Test::Mock pod on CPAN.</p>
+</div>
+</div>
+
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="database.html">Database Integration</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="email.html">E-mail</a>&#160;&#160;»
+        </p>
+</nav>
+        
+
+
+        <footer>
+            &copy; Copyright 2011, tokuhirom.
+        </footer>
+      </div>
+  </body>
+</html>

@@ -1,0 +1,116 @@
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>WebSocket support &mdash; Amon2 6.13 documentation</title>
+    <!-- <link rel="stylesheet" href="_static/haiku.css" type="text/css" /> -->
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '6.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/"/>
+    <link rel="top" title="Amon2 6.13 documentation" href="index.html" />
+    <link rel="up" title="Extends Amon2" href="extends.html" />
+    <link rel="next" title="Session" href="session.html" />
+    <link rel="prev" title="Extends Amon2" href="extends.html" />
+    <link href="_static/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <link rel="stylesheet/less" type="text/css" href="_static/styles.less">
+    <script src="_static/less.js" type="text/javascript"></script>
+    <style>
+        body {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
+    <script type="text/javascript" src="_static/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('pre').addClass('prettyprint');
+            prettyPrint();
+        });
+    </script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+      <div class="container">
+            <header>
+                <h1 class="heading"><a href="docs.html">
+                    <span class="shorttitle">Amon2 6.13 documentation</span></a></h1>
+                <h2 class="heading"><span class="subtitle">WebSocket support</span></h2>
+            </header>
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="extends.html">Extends Amon2</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="session.html">Session</a>&#160;&#160;»
+        </p>
+</nav>
+            
+        
+
+            
+  <div class="section" id="websocket-support">
+<h1>WebSocket support<a class="headerlink" href="#websocket-support" title="Permalink to this headline">¶</a></h1>
+<p>Amon2 supports WebSocket natively(experimental).</p>
+<div class="section" id="installation">
+<h2>INSTALLATION<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>Amon2&#8217;s websocket support is bundleed on core distribution, but there&#8217;s missing deps.</p>
+<blockquote>
+<div>% cpanm Protocol::WebSocket Twiggy</div></blockquote>
+<p>Amon2 using Protocol::WebSocket as a protocol parser, and Twiggy is a httpd. You can&#8217;t use Starlet/Starman to support WebSocket.</p>
+</div>
+<div class="section" id="code">
+<h2>CODE<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<p>It&#8217;s very easy to use.:</p>
+<div class="highlight-python"><pre>any '/echo' =&gt; sub {
+    my ($c) = @_;
+    return $c-&gt;websocket(sub {
+        my $ws = shift;
+        $ws-&gt;on_receive_message(sub {
+            my ($c, $message) = @_;
+            $ws-&gt;send_message("YAY: " . $message);
+        });
+    });
+};</pre>
+</div>
+<p>And full code of chat application is here: <a class="reference external" href="http://api.metacpan.org/source/TOKUHIROM/Amon2-3.52/eg/realtime-chat/chat.psgi">http://api.metacpan.org/source/TOKUHIROM/Amon2-3.52/eg/realtime-chat/chat.psgi</a></p>
+</div>
+<div class="section" id="see-also">
+<h2>SEE ALSO<a class="headerlink" href="#see-also" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://metacpan.org/module/Amon2::Plugin::Web::WebSocket">https://metacpan.org/module/Amon2::Plugin::Web::WebSocket</a></p>
+</div>
+</div>
+
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="extends.html">Extends Amon2</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="session.html">Session</a>&#160;&#160;»
+        </p>
+</nav>
+        
+
+
+        <footer>
+            &copy; Copyright 2011, tokuhirom.
+        </footer>
+      </div>
+  </body>
+</html>

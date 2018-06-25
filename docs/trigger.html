@@ -1,0 +1,143 @@
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Triggers &mdash; Amon2 6.13 documentation</title>
+    <!-- <link rel="stylesheet" href="_static/haiku.css" type="text/css" /> -->
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '6.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/"/>
+    <link rel="top" title="Amon2 6.13 documentation" href="index.html" />
+    <link rel="up" title="Architecture of Amon2" href="architecture.html" />
+    <link rel="next" title="CLI(Command Line Interface)" href="cli.html" />
+    <link rel="prev" title="Components" href="components.html" />
+    <link href="_static/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <link rel="stylesheet/less" type="text/css" href="_static/styles.less">
+    <script src="_static/less.js" type="text/javascript"></script>
+    <style>
+        body {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
+    <script type="text/javascript" src="_static/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('pre').addClass('prettyprint');
+            prettyPrint();
+        });
+    </script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+      <div class="container">
+            <header>
+                <h1 class="heading"><a href="docs.html">
+                    <span class="shorttitle">Amon2 6.13 documentation</span></a></h1>
+                <h2 class="heading"><span class="subtitle">Triggers</span></h2>
+            </header>
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="components.html">Components</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cli.html">CLI(Command Line Interface)</a>&#160;&#160;»
+        </p>
+</nav>
+            
+        
+
+            
+  <div class="section" id="triggers">
+<h1>Triggers<a class="headerlink" href="#triggers" title="Permalink to this headline">¶</a></h1>
+<p>Amon2 supports basic trigger feature like <a class="reference external" href="http://search.cpan.org/perldoc?Class::Trigger">Class::Trigger</a>.</p>
+<p>You can add the callback subroutine for following hook points.</p>
+<div class="section" id="before-dispatch">
+<h2>BEFORE_DISPATCH<a class="headerlink" href="#before-dispatch" title="Permalink to this headline">¶</a></h2>
+<p>You can add the callback function by following code:</p>
+<div class="highlight-python"><pre>package MyApp::Web;
+__PACKAGE__-&gt;add_trigger(
+    BEFORE_DISPATCH =&gt; sub {
+        my ($c) = @_;
+        ...
+    }
+);</pre>
+</div>
+<p>If you returns object, is instance of Plack::Response, Amon2 does not calls dispatcher.</p>
+</div>
+<div class="section" id="html-filter">
+<h2>HTML_FILTER<a class="headerlink" href="#html-filter" title="Permalink to this headline">¶</a></h2>
+<p>This method called after rendering HTML. You can use it as following:</p>
+<div class="highlight-python"><pre>package MyApp::Web;
+__PACKAGE__-&gt;add_trigger(
+    HTML_FILTER =&gt; sub {
+        my ($c, $html) = @_;
+        ...
+        return $html; # return rewrote html.
+    }
+);</pre>
+</div>
+<p>You can call it as a instance method. It&#8217;s only works for this request. It&#8217;s useful for operating HTML:</p>
+<div class="highlight-python"><pre>sub dispatch {
+    my $c = shift;
+    ...
+    $c-&gt;add_trigger(
+        HTML_FILTER =&gt; sub {
+            my ($c, $html) = @_;
+            $html =~ s/John/Dan/;
+            $html;
+        }
+    );
+    ...
+}</pre>
+</div>
+</div>
+<div class="section" id="after-dispatch">
+<h2>AFTER_DISPATCH<a class="headerlink" href="#after-dispatch" title="Permalink to this headline">¶</a></h2>
+<p>This hook call after dispatch. You can use it as following:</p>
+<div class="highlight-python"><pre>package MyApp::Web;
+__PACKAGE__-&gt;add_trigger(
+    BEFORE_DISPATCH =&gt; sub {
+        my ($c, $response) = @_;
+        ...
+    }
+);</pre>
+</div>
+<p>This feature is useful to operate after rendering HTML, etc.</p>
+</div>
+</div>
+
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="components.html">Components</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="cli.html">CLI(Command Line Interface)</a>&#160;&#160;»
+        </p>
+</nav>
+        
+
+
+        <footer>
+            &copy; Copyright 2011, tokuhirom.
+        </footer>
+      </div>
+  </body>
+</html>

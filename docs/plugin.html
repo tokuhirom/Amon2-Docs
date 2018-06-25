@@ -1,0 +1,134 @@
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Plugin &mdash; Amon2 6.13 documentation</title>
+    <!-- <link rel="stylesheet" href="_static/haiku.css" type="text/css" /> -->
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '6.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/"/>
+    <link rel="top" title="Amon2 6.13 documentation" href="index.html" />
+    <link rel="up" title="Architecture of Amon2" href="architecture.html" />
+    <link rel="next" title="Extends Amon2" href="extends.html" />
+    <link rel="prev" title="Flavors" href="flavor.html" />
+    <link href="_static/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <link rel="stylesheet/less" type="text/css" href="_static/styles.less">
+    <script src="_static/less.js" type="text/javascript"></script>
+    <style>
+        body {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
+    <script type="text/javascript" src="_static/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('pre').addClass('prettyprint');
+            prettyPrint();
+        });
+    </script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+      <div class="container">
+            <header>
+                <h1 class="heading"><a href="docs.html">
+                    <span class="shorttitle">Amon2 6.13 documentation</span></a></h1>
+                <h2 class="heading"><span class="subtitle">Plugin</span></h2>
+            </header>
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="flavor.html">Flavors</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="extends.html">Extends Amon2</a>&#160;&#160;»
+        </p>
+</nav>
+            
+        
+
+            
+  <div class="section" id="plugin">
+<h1>Plugin<a class="headerlink" href="#plugin" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="plugin-architecture">
+<h2>Plugin architecture<a class="headerlink" href="#plugin-architecture" title="Permalink to this headline">¶</a></h2>
+<p>Amon2&#8217;s plugin architecture is very simple.</p>
+<p>Plugin class MUST implement <tt class="docutils literal"><span class="pre">MyPlugin-&gt;init($context_class,</span> <span class="pre">\%configuration)</span></tt>. That&#8217;s all.</p>
+<p><tt class="docutils literal"><span class="pre">$context_class</span></tt> is a class name. It would be child class of the <tt class="docutils literal"><span class="pre">Amon2</span></tt>.</p>
+</div>
+<div class="section" id="flavor">
+<h2>Flavor<a class="headerlink" href="#flavor" title="Permalink to this headline">¶</a></h2>
+<p>Amon2.60+ provides setup script for plugins.</p>
+<p>Plugins can inject a code for bootstrapping code by:</p>
+<div class="highlight-python"><pre>% amon2-setup.pl --plugin=Teng MyApp</pre>
+</div>
+<p>Just add a &#8220;&#64;&#64;&#8221; lines based on __DATA__ section:</p>
+<div class="highlight-python"><pre>package Amon2::Plugin::Web::PlackSession;
+__DATA__
+
+@@ prereq_pm
+    'Plack::Middleware::Session' =&gt; 0,
+@@ web_context
+use Plack::Session;
+sub session {
+    $_[0]-&gt;{session} //= Plack::Session-&gt;new($_[0]-&gt;req-&gt;env);
+}
+@@ middleware
+enable 'Plack::Middleware::Session';</pre>
+</div>
+<div class="section" id="hook-points">
+<h3>Hook points<a class="headerlink" href="#hook-points" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="makefile-pl">
+<h4>Makefile.PL<a class="headerlink" href="#makefile-pl" title="Permalink to this headline">¶</a></h4>
+<p>add a prerequired modules for Makefile.PL.</p>
+</div>
+<div class="section" id="app-psgi">
+<h4>app.psgi<a class="headerlink" href="#app-psgi" title="Permalink to this headline">¶</a></h4>
+<p>app.psgi</p>
+</div>
+<div class="section" id="context-path">
+<h4>&lt;&lt;CONTEXT_PATH&gt;&gt;<a class="headerlink" href="#context-path" title="Permalink to this headline">¶</a></h4>
+<p>Add a snippet for lib/MyApp.pm.</p>
+</div>
+<div class="section" id="web-context-path">
+<h4>&lt;&lt;WEB_CONTEXT_PATH&gt;&gt;<a class="headerlink" href="#web-context-path" title="Permalink to this headline">¶</a></h4>
+<p>Add a snippet for lib/MyApp/Web.pm.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="flavor.html">Flavors</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="extends.html">Extends Amon2</a>&#160;&#160;»
+        </p>
+</nav>
+        
+
+
+        <footer>
+            &copy; Copyright 2011, tokuhirom.
+        </footer>
+      </div>
+  </body>
+</html>

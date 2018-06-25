@@ -1,0 +1,189 @@
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Flavors &mdash; Amon2 6.13 documentation</title>
+    <!-- <link rel="stylesheet" href="_static/haiku.css" type="text/css" /> -->
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '6.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/"/>
+    <link rel="top" title="Amon2 6.13 documentation" href="index.html" />
+    <link rel="up" title="Architecture of Amon2" href="architecture.html" />
+    <link rel="next" title="Plugin" href="plugin.html" />
+    <link rel="prev" title="Configuration" href="configuration.html" />
+    <link href="_static/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <link rel="stylesheet/less" type="text/css" href="_static/styles.less">
+    <script src="_static/less.js" type="text/javascript"></script>
+    <style>
+        body {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
+    <script type="text/javascript" src="_static/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('pre').addClass('prettyprint');
+            prettyPrint();
+        });
+    </script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+      <div class="container">
+            <header>
+                <h1 class="heading"><a href="docs.html">
+                    <span class="shorttitle">Amon2 6.13 documentation</span></a></h1>
+                <h2 class="heading"><span class="subtitle">Flavors</span></h2>
+            </header>
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="configuration.html">Configuration</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="plugin.html">Plugin</a>&#160;&#160;»
+        </p>
+</nav>
+            
+        
+
+            
+  <div class="section" id="flavors">
+<h1>Flavors<a class="headerlink" href="#flavors" title="Permalink to this headline">¶</a></h1>
+<p>This document describes Amon2&#8217;s Flavor architecture.</p>
+<p>Amon2 provides a setup script helper. It was completely rewritten at Amon2 2.60.</p>
+<div class="section" id="properties">
+<h2>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="is-standalone">
+<h3>is_standalone<a class="headerlink" href="#is-standalone" title="Permalink to this headline">¶</a></h3>
+<p>Value type: boolean</p>
+<p>Is it a standalone flavor? If there is no standalone flavor is loadded, Amon2::Setup loads Amon2::Setup::Flavor::Basic as base flavor automatically.</p>
+<p>This property is not mandatory. If there is no method, then it is not a standalone flavor.</p>
+<p>Example code is:</p>
+<div class="highlight-python"><pre>package My::Flavor1;
+sub is_standalone { 1 }</pre>
+</div>
+</div>
+<div class="section" id="parent">
+<h3>parent<a class="headerlink" href="#parent" title="Permalink to this headline">¶</a></h3>
+<p>Value type: list of strings</p>
+<p>This property describes parent flavor. There is a example code:</p>
+<div class="highlight-python"><pre>package My::Flavor1;
+sub parent { qw(Basic) }</pre>
+</div>
+<p>Or:</p>
+<div class="highlight-python"><pre>package My::Flavor2;
+sub parent { qw(+My::Flavor1) }</pre>
+</div>
+</div>
+<div class="section" id="assets">
+<h3>assets<a class="headerlink" href="#assets" title="Permalink to this headline">¶</a></h3>
+<p>Value type: list of strings</p>
+<p>You can specify the assets class list:</p>
+<div class="highlight-python"><pre>package My::Flavor1;
+sub assets { qw(jQuery) }</pre>
+</div>
+</div>
+<div class="section" id="plugins">
+<h3>plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h3>
+<p>Value type: list of strings</p>
+<p>You can load a plugins by flavor:</p>
+<div class="highlight-python"><pre>package My::Flavor1;
+sub plugins { qw(Web::JSON) }</pre>
+</div>
+</div>
+<div class="section" id="context-path">
+<h3>context_path<a class="headerlink" href="#context-path" title="Permalink to this headline">¶</a></h3>
+<p>This property indicates a path of context class. It is normally lib/&lt;&lt;PATH&gt;&gt;.pm.</p>
+</div>
+<div class="section" id="web-context-path">
+<h3>web_context_path<a class="headerlink" href="#web-context-path" title="Permalink to this headline">¶</a></h3>
+<p>This property indicates a path of web context class. It is normally lib/&lt;&lt;PATH&gt;&gt;/Web.pm.</p>
+</div>
+</div>
+<div class="section" id="path-rewriting">
+<h2>Path rewriting<a class="headerlink" href="#path-rewriting" title="Permalink to this headline">¶</a></h2>
+<p>Amon2::Setup rewrites a template path for normalization.</p>
+<div class="section" id="path">
+<h3>&lt;&lt;PATH&gt;&gt;<a class="headerlink" href="#path" title="Permalink to this headline">¶</a></h3>
+<p>&lt;&lt;PATH&gt;&gt; rewrites as a directory path from module name. e.g. &#8220;My/App&#8221;:</p>
+<div class="highlight-python"><pre>lib/&lt;&lt;PATH&gt;&gt;.pm → lib/My/App.pm
+lib/&lt;&lt;PATH&gt;&gt;/Web.pm → lib/My/App/Web.pm</pre>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>&lt;&lt;WEB_CONTEXT_PATH&gt;&gt;<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>This indicates a path for web context object. e.g.:</p>
+<blockquote>
+<div>&lt;&lt;WEB_CONTEXT_PATH&gt;&gt; → lib/&lt;&lt;PATH&gt;&gt;/Web.pm</div></blockquote>
+</div>
+<div class="section" id="id2">
+<h3>&lt;&lt;CONTEXT_PATH&gt;&gt;<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>This indicates a path for context object. e.g.:</p>
+<blockquote>
+<div>&lt;&lt;CONTEXT_PATH&gt;&gt; → lib/&lt;&lt;PATH&gt;&gt;.pm</div></blockquote>
+</div>
+</div>
+<div class="section" id="templates">
+<h2>Templates<a class="headerlink" href="#templates" title="Permalink to this headline">¶</a></h2>
+<p>You can write a templates on __DATA__ section in <a class="reference external" href="Data::Section::Simple's">Data::Section::Simple&#8217;s</a> format like:</p>
+<div class="highlight-python"><pre>package My::Flavor1;
+__DATA__
+@@ lib/&lt;&lt;PATH&gt;&gt;/Web.pm
+: cascade "!";
+: after prepare -&gt; {
+# load all controller classes
+use Module::Find ();
+Module::Find::useall("&lt;: $module :&gt;::DB");
+: }
+@@ t/04_foo.t
+use Test::More;
+ok 1;
+done_testing;</pre>
+</div>
+<p>Flavor&#8217;s template is Text::Xslate. And it uses Kolon syntax for using template cascading.</p>
+<div class="section" id="template-cascading">
+<h3>Template Cascading<a class="headerlink" href="#template-cascading" title="Permalink to this headline">¶</a></h3>
+<p>Amon2 uses template cascading for flexible templating in setup script.</p>
+<p>Just write a following line to indicate a overriding parent file:</p>
+<div class="highlight-python"><pre>: cascade "!";</pre>
+</div>
+<p>List of overridable block names are available on each flavor&#8217;s docs.</p>
+</div>
+</div>
+</div>
+
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="configuration.html">Configuration</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="plugin.html">Plugin</a>&#160;&#160;»
+        </p>
+</nav>
+        
+
+
+        <footer>
+            &copy; Copyright 2011, tokuhirom.
+        </footer>
+      </div>
+  </body>
+</html>

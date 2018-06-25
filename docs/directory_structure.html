@@ -1,0 +1,168 @@
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Directory Structure &mdash; Amon2 6.13 documentation</title>
+    <!-- <link rel="stylesheet" href="_static/haiku.css" type="text/css" /> -->
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '6.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/"/>
+    <link rel="top" title="Amon2 6.13 documentation" href="index.html" />
+    <link rel="next" title="System requierments" href="requirements.html" />
+    <link rel="prev" title="Installation" href="install.html" />
+    <link href="_static/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <link rel="stylesheet/less" type="text/css" href="_static/styles.less">
+    <script src="_static/less.js" type="text/javascript"></script>
+    <style>
+        body {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
+    <script type="text/javascript" src="_static/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('pre').addClass('prettyprint');
+            prettyPrint();
+        });
+    </script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+      <div class="container">
+            <header>
+                <h1 class="heading"><a href="docs.html">
+                    <span class="shorttitle">Amon2 6.13 documentation</span></a></h1>
+                <h2 class="heading"><span class="subtitle">Directory Structure</span></h2>
+            </header>
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="install.html">Installation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="requirements.html">System requierments</a>&#160;&#160;»
+        </p>
+</nav>
+            
+        
+
+            
+  <div class="section" id="directory-structure">
+<h1>Directory Structure<a class="headerlink" href="#directory-structure" title="Permalink to this headline">¶</a></h1>
+<p>The directory structure of Amon2 is here</p>
+<div class="highlight-python"><pre>source/pl/MyApp/
+├── Build.PL
+├── builder
+│   └── MyBuilder.pm
+├── config
+│   ├── development.pl
+│   ├── production.pl
+│   └── test.pl
+├── cpanfile
+├── db
+├── lib
+│   ├── MyApp
+│   │   ├── DB
+│   │   │   ├── Row.pm
+│   │   │   └── Schema.pm
+│   │   ├── DB.pm
+│   │   ├── Web
+│   │   │   ├── Dispatcher.pm
+│   │   │   ├── View.pm
+│   │   │   └── ViewFunctions.pm
+│   │   └── Web.pm
+│   └── MyApp.pm
+├── minil.toml
+├── script
+│   └── myapp-server
+├── sql
+│   ├── mysql.sql
+│   └── sqlite.sql
+├── static
+│   ├── 404.html
+│   ├── 500.html
+│   ├── 502.html
+│   ├── 503.html
+│   ├── 504.html
+│   ├── bootstrap
+│   │   ├── css
+│   │   │   ├── bootstrap-theme.css
+│   │   │   ├── bootstrap-theme.min.css
+│   │   │   ├── bootstrap.css
+│   │   │   └── bootstrap.min.css
+│   │   ├── fonts
+│   │   │   ├── glyphicons-halflings-regular.eot
+│   │   │   ├── glyphicons-halflings-regular.svg
+│   │   │   ├── glyphicons-halflings-regular.ttf
+│   │   │   └── glyphicons-halflings-regular.woff
+│   │   └── js
+│   │       ├── bootstrap.js
+│   │       └── bootstrap.min.js
+│   ├── css
+│   │   └── main.css
+│   ├── img
+│   ├── js
+│   │   ├── es5-shim.min.js
+│   │   ├── jquery-2.0.3.min.js
+│   │   ├── main.js
+│   │   ├── micro-location.js
+│   │   ├── micro_dispatcher.js
+│   │   ├── micro_template.js
+│   │   ├── sprintf-0.7-beta1.js
+│   │   └── strftime.js
+│   └── robots.txt
+├── t
+│   ├── 00_compile.t
+│   ├── 01_root.t
+│   ├── 02_mech.t
+│   ├── 03_assets.t
+│   ├── 06_jshint.t
+│   └── Util.pm
+├── tmpl
+│   ├── include
+│   │   ├── layout.tx
+│   │   └── pager.tx
+│   └── index.tx
+└── xt
+    ├── 01_pod.t
+    └── 02_perlcritic.t
+
+21 directories, 54 files
+</pre>
+</div>
+</div>
+
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="install.html">Installation</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="requirements.html">System requierments</a>&#160;&#160;»
+        </p>
+</nav>
+        
+
+
+        <footer>
+            &copy; Copyright 2011, tokuhirom.
+        </footer>
+      </div>
+  </body>
+</html>

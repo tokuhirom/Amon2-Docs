@@ -1,0 +1,234 @@
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Tutorial - Create BBS site &mdash; Amon2 6.13 documentation</title>
+    <!-- <link rel="stylesheet" href="_static/haiku.css" type="text/css" /> -->
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '6.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/"/>
+    <link rel="top" title="Amon2 6.13 documentation" href="index.html" />
+    <link rel="next" title="Architecture of Amon2" href="architecture.html" />
+    <link rel="prev" title="Setup Amon2 application with Dotcloud" href="dotcloud.html" />
+    <link href="_static/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <link rel="stylesheet/less" type="text/css" href="_static/styles.less">
+    <script src="_static/less.js" type="text/javascript"></script>
+    <style>
+        body {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
+    <script type="text/javascript" src="_static/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('pre').addClass('prettyprint');
+            prettyPrint();
+        });
+    </script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+      <div class="container">
+            <header>
+                <h1 class="heading"><a href="docs.html">
+                    <span class="shorttitle">Amon2 6.13 documentation</span></a></h1>
+                <h2 class="heading"><span class="subtitle">Tutorial - Create BBS site</span></h2>
+            </header>
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="dotcloud.html">Setup Amon2 application with Dotcloud</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="architecture.html">Architecture of Amon2</a>&#160;&#160;»
+        </p>
+</nav>
+            
+        
+
+            
+  <div class="section" id="tutorial-create-bbs-site">
+<h1>Tutorial - Create BBS site<a class="headerlink" href="#tutorial-create-bbs-site" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="create-skeleton">
+<h2>Create skeleton<a class="headerlink" href="#create-skeleton" title="Permalink to this headline">¶</a></h2>
+<p>Just type:</p>
+<div class="highlight-python"><pre>% amon2-setup.pl BBS
+% cd BBS/
+% curl -L http://cpanmin.us | perl - --installdeps .</pre>
+</div>
+</div>
+<div class="section" id="setup-database">
+<h2>Setup database<a class="headerlink" href="#setup-database" title="Permalink to this headline">¶</a></h2>
+<p>Put the following in sql/sqlite.sql:</p>
+<div class="highlight-python"><pre>CREATE TABLE IF NOT EXISTS member (
+    id           INTEGER NOT NULL PRIMARY KEY,
+    name         VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS sessions (
+    id           CHAR(72) PRIMARY KEY,
+    session_data TEXT
+);
+
+CREATE TABLE IF NOT EXISTS entry (
+    entry_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    body varchar(255) not null
+);
+</pre>
+</div>
+<p>And apply the schema:</p>
+<div class="highlight-python"><pre>% sqlite3 db/development.db &lt; sql/sqlite.sql</pre>
+</div>
+<p>You can find the configuration of RDBMS in config/development.pl</p>
+<div class="highlight-python"><pre>use File::Spec;
+use File::Basename qw(dirname);
+my $basedir = File::Spec-&gt;rel2abs(File::Spec-&gt;catdir(dirname(__FILE__), '..'));
+my $dbpath = File::Spec-&gt;catfile($basedir, 'db', 'development.db');
++{
+    'DBI' =&gt; [
+        "dbi:SQLite:dbname=$dbpath", '', '',
+        +{
+            sqlite_unicode =&gt; 1,
+        }
+    ],
+};
+</pre>
+</div>
+</div>
+<div class="section" id="run-the-web-server">
+<h2>Run the web server<a class="headerlink" href="#run-the-web-server" title="Permalink to this headline">¶</a></h2>
+<p>You can run the testing web server with the following command:</p>
+<div class="highlight-python"><pre>% perl -Ilib script/bbs-server
+BBS: http://127.0.0.1:5000/</pre>
+</div>
+<p>, where 5000 is the default port. Then, you can access <a class="reference external" href="http://0:5000/">http://0:5000/</a> for testing and debugging.</p>
+</div>
+<div class="section" id="put-teng-schema">
+<h2>Put Teng schema<a class="headerlink" href="#put-teng-schema" title="Permalink to this headline">¶</a></h2>
+<p>Open and edit lib/BBS/DB/Schema.pm as follows:</p>
+<div class="highlight-python"><pre>package BBS::DB::Schema;
+use strict;
+use warnings;
+use utf8;
+
+use Teng::Schema::Declare;
+
+base_row_class 'BBS::DB::Row';
+
+table {
+    name 'sessions';
+    pk 'id';
+    columns qw(session_data);
+};
+
+table {
+    name 'entry';
+    pk 'entry_id';
+    columns qw(entry_id body);
+};
+
+1;
+</pre>
+</div>
+</div>
+<div class="section" id="implement-controller">
+<h2>Implement controller<a class="headerlink" href="#implement-controller" title="Permalink to this headline">¶</a></h2>
+<p>Open and edit lib/BBS/Web/Dispatcher.pm as follows:</p>
+<div class="highlight-python"><pre>package BBS::Web::Dispatcher;
+use strict;
+use warnings;
+
+use Amon2::Web::Dispatcher::Lite;
+
+any '/' =&gt; sub {
+    my ($c) = @_;
+
+    my @entries = $c-&gt;db-&gt;search(
+        entry =&gt; {
+        }, {
+            order_by =&gt; 'entry_id DESC',
+            limit    =&gt; 10,
+        }
+    );
+    return $c-&gt;render( "index.tx" =&gt; { entries =&gt; \@entries, } );
+};
+
+post '/post' =&gt; sub {
+    my ($c) = @_;
+
+    if (my $body = $c-&gt;req-&gt;param('body')) {
+        $c-&gt;db-&gt;insert(
+            entry =&gt; +{
+                body =&gt; $body,
+            }
+        );
+    }
+    return $c-&gt;redirect('/');
+};
+
+1;
+</pre>
+</div>
+</div>
+<div class="section" id="edit-template">
+<h2>Edit template<a class="headerlink" href="#edit-template" title="Permalink to this headline">¶</a></h2>
+<p>Open and edit tmpl/index.tx as follows:</p>
+<div class="highlight-python"><pre>: cascade "include/layout.tx"
+
+: override content -&gt; {
+
+&lt;form method="post" action="&lt;: uri_for('/post') :&gt;"&gt;
+    &lt;input type="text" name="body" /&gt;
+    &lt;input type="submit" value="Send" /&gt;
+&lt;/form&gt;
+
+&lt;ul&gt;
+    &lt;: for $entries -&gt; $entry { :&gt;
+    &lt;li&gt;&lt;: $entry.entry_id :&gt;. &lt;: $entry.body :&gt;&lt;/li&gt;
+    &lt;: } :&gt;
+&lt;/ul&gt;
+
+: }
+</pre>
+</div>
+</div>
+<div class="section" id="that-s-all">
+<h2>That&#8217;s all.<a class="headerlink" href="#that-s-all" title="Permalink to this headline">¶</a></h2>
+<p>Yes, Amon2 is pretty easy!</p>
+</div>
+</div>
+
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="dotcloud.html">Setup Amon2 application with Dotcloud</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="architecture.html">Architecture of Amon2</a>&#160;&#160;»
+        </p>
+</nav>
+        
+
+
+        <footer>
+            &copy; Copyright 2011, tokuhirom.
+        </footer>
+      </div>
+  </body>
+</html>

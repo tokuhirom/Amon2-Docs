@@ -1,0 +1,155 @@
+
+
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Japanese Mobile Phones &mdash; Amon2 6.13 documentation</title>
+    <!-- <link rel="stylesheet" href="_static/haiku.css" type="text/css" /> -->
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '6.13',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/"/>
+    <link rel="top" title="Amon2 6.13 documentation" href="index.html" />
+    <link rel="up" title="Extends Amon2" href="extends.html" />
+    <link rel="next" title="Localization" href="l10n.html" />
+    <link rel="prev" title="Request/Response" href="request_response.html" />
+    <link href="_static/google-code-prettify/prettify.css" type="text/css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+    <link rel="stylesheet/less" type="text/css" href="_static/styles.less">
+    <script src="_static/less.js" type="text/javascript"></script>
+    <style>
+        body {
+            font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+        }
+    </style>
+    <script type="text/javascript" src="_static/google-code-prettify/prettify.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('pre').addClass('prettyprint');
+            prettyPrint();
+        });
+    </script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+      <div class="container">
+            <header>
+                <h1 class="heading"><a href="docs.html">
+                    <span class="shorttitle">Amon2 6.13 documentation</span></a></h1>
+                <h2 class="heading"><span class="subtitle">Japanese Mobile Phones</span></h2>
+            </header>
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="request_response.html">Request/Response</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="l10n.html">Localization</a>&#160;&#160;»
+        </p>
+</nav>
+            
+        
+
+            
+  <div class="section" id="japanese-mobile-phones">
+<h1>Japanese Mobile Phones<a class="headerlink" href="#japanese-mobile-phones" title="Permalink to this headline">¶</a></h1>
+<p>Japanese mobile phones have very strange specs.</p>
+<div class="section" id="detect-phone-informations-from-http-headers">
+<h2>Detect phone informations from HTTP headers<a class="headerlink" href="#detect-phone-informations-from-http-headers" title="Permalink to this headline">¶</a></h2>
+<p>You can use <a class="reference external" href="HTTP::MobileAgent">HTTP::MobileAgent</a> module to get information from HTTP headers.</p>
+<p>You would use Amon2::Plugin::Web::MobileAgent for this purpose. Install it from CPAN.:</p>
+<div class="highlight-python"><pre>% cpanm Amon2::Plugin::Web::MobileAgent</pre>
+</div>
+<p>You can load a module.:</p>
+<div class="highlight-python"><pre>package MyApp::Web;
+use parent qw/MyApp Amon2::Web/;
+__PACKAGE__-&gt;load_plugins('Web::MobileAgent');
+1;</pre>
+</div>
+<p>and call it on your controller.:</p>
+<div class="highlight-python"><pre>my $ma = $c-&gt;mobile_agent(); # instance of HTTP::MobileAgent</pre>
+</div>
+</div>
+<div class="section" id="change-the-content-type-encoding-for-mobile-phones">
+<h2>Change the Content-Type/encoding for mobile phones<a class="headerlink" href="#change-the-content-type-encoding-for-mobile-phones" title="Permalink to this headline">¶</a></h2>
+<p>I wrote a Amon2::Plugin::Web::MobileCharset.</p>
+<p>Usage of this module is very easy. Install it from CPAN.:</p>
+<div class="highlight-python"><pre>% cpanm Amon2::Plugin::Web::MobileCharset</pre>
+</div>
+<p>And load a plugin.:</p>
+<div class="highlight-python"><pre>package MyApp::Web;
+use parent qw(Amon2::Web);
+
+__PACKAGE__-&gt;load_plugins(
+    'Web::MobileAgent',
+    'Web::MobileCharset',
+);</pre>
+</div>
+<p>Amon2::Plugin::Web::MobileCharset provides $c-&gt;html_content_type method and $c-&gt;encoding method. You don&#8217;t worry about charsets.</p>
+</div>
+<div class="section" id="how-can-i-convert-a-japanese-zenkaku-katakana-to-hankaku-katakana">
+<h2>How can I convert a Japanese Zenkaku-Katakana to Hankaku-Katakana?<a class="headerlink" href="#how-can-i-convert-a-japanese-zenkaku-katakana-to-hankaku-katakana" title="Permalink to this headline">¶</a></h2>
+<p>You can add a HTML filter. Install Lingua::JA::Regular::Unicode from CPAN.:</p>
+<div class="highlight-python"><pre>% cpanm Lingua::JA::Regular::Unicode</pre>
+</div>
+<p>And you can add a katakana_z2h filter for HTML processing.:</p>
+<div class="highlight-python"><pre>package MyApp::Web;
+use Lingua::JA::Regular::Unicode qw(katakana_z2h);
+__PACKAGE__-&gt;add_trigger(
+    HTML_FILTER =&gt; sub {
+        my ($c, $html) = @_;
+        return katakana_z2h($html);
+    }
+);</pre>
+</div>
+</div>
+<div class="section" id="how-can-i-use-a-stickyquery-session-for-docomo-browser-1-0">
+<h2>How can I use a StickyQuery session for DoCoMo Browser 1.0?<a class="headerlink" href="#how-can-i-use-a-stickyquery-session-for-docomo-browser-1-0" title="Permalink to this headline">¶</a></h2>
+<p>You can use <a class="reference external" href="HTTP::Session">HTTP::Session</a> for this purpose:</p>
+<div class="highlight-python"><pre>package MyApp::Web;
+use HTTP::Session::Store::Memcached;
+__PACKAGE__-&gt;load_plugins(qw/Web::HTTPSession/ =&gt; {
+    state =&gt; 'URI',
+    store =&gt; sub {
+        my ($c) = @_;
+        HTTP::Session::Store::Memcached-&gt;new(
+            memd =&gt; $c-&gt;get('Cache::Memcached::Fast')
+        );
+    },
+});</pre>
+</div>
+<p>But I don&#8217;t recommend to use StickyQuery. It adds vulnerability.</p>
+</div>
+</div>
+
+
+            <nav>
+        <p>
+        «&#160;&#160;<a href="request_response.html">Request/Response</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="docs.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="l10n.html">Localization</a>&#160;&#160;»
+        </p>
+</nav>
+        
+
+
+        <footer>
+            &copy; Copyright 2011, tokuhirom.
+        </footer>
+      </div>
+  </body>
+</html>
