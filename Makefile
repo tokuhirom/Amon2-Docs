@@ -59,6 +59,7 @@ html:
 	cp source/_templates/index.html build/html/index.html
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	rsync -avz build/html/ docs
+	touch docs/.nojekyll
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
 
